@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang=en><meta http-equiv=content-type content="text/html; charset=UTF-8"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width, initial-scale=1"><title>VBA | Notes in Progress</title><meta property=og:title content=VBA><meta name=description content=PageSubTitle><meta property=og:site_name content=Notes in progress><meta property=og:type content=article><script type=application/ld+json>
+  {"@type":"BlogPosting","headline":"VBA","dateModified":"2019-02-09T00:00:00+00:00","datePublished":"2019-02-09T00:00:00+00:00","url":PageUrl,"mainEntityOfPage":{"@type":"WebPage","@id":PageUrl},"description":"PageSubTitle","@context":"http://schema.org"}</script><link rel=stylesheet href=https://febkor.github.io/NotesInProgress/static/main.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){for(var i,t=document.getElementsByClassName("math"),n=0;n<t.length;n++)i=t[n].firstChild,t[n].tagName=="SPAN"&&katex.render(i.data,t[n],{displayMode:t[n].classList.contains("display"),throwOnError:!1})})</script><header class=site-header role=banner><div class=wrapper><a class=site-title rel=author href=https://febkor.github.io/NotesInProgress/ >Notes in Progress</a><nav class=site-nav><input type=checkbox id=nav-trigger class=nav-trigger> <label for=nav-trigger></label></nav></div></header><main class=page-content aria-label=Content><div class=wrapper><article class="post h-entry" itemscope="" itemtype=http://schema.org/BlogPosting><header class=post-header><h1 class="post-title p-name" itemprop="name headline">VBA</h1></header><div class="post-content e-content" itemprop=articleBody><h1 id=preamble>Preamble</h1>
+<pre class=vba><code>Option Explicit
+
+Public Function myFunc(x as Double, y as Integer, myRange as Range) As Double
+    disp(myRange.Cells(1,2))
+    myFunc = x*y * (myRange.Rows.Count * myRange.Columns.Count)
+End Function</code></pre><h1 id=data-types>Data types</h1><p>The types are:<ul><li>Boolean<li>Byte<li>Date<li>Double<li>Integer<li>Long<li>Single<li>String</ul>
+<pre class=vba><code>Dim mystring as String
+
+Dim myFixedArray(1 to 5, 1 to 15) as Double
+
+Dim myVariableArray() As Double
+Redim myVariableArray(1 to 4, 1 to 2)
+myVariableArray(3,1)</code></pre><h1 id=conditional-execution>Conditional Execution</h1>
+<pre class=vba><code>If test = 0 Then
+    statements
+ElseIf test = 1 Or test = 2 And test > 1 Then
+    statements
+Else
+    statements
+End If          </code></pre>
+<pre class=vba><code>Select Case index
+    Case 1,2
+        statements
+    Case Is &lt; 0
+        statements
+    Case 10 To 20
+        statements
+    Case Else
+        statements
+End Select</code></pre><h1 id=loops>Loops</h1>
+<pre class=vba><code>Dim index as Integer
+
+For index = j To k step m
+    statements
+Next index
+
+Do While condition
+    statements
+Loop</code></pre></div><a class=u-url href=VBA hidden=""></a></article></div></main><footer class="site-footer h-card"><data class=u-url href=/ ></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor<li><a class=u-email href=""></a></ul></div></div><div class="footer-col footer-col-3"><p></div></div></footer>
