@@ -1,170 +1,211 @@
-<!DOCTYPE html><html lang=en><meta http-equiv=content-type content="text/html; charset=UTF-8"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width, initial-scale=1"><title>Python | Notes in Progress</title><meta property=og:title content=Python><meta name=description content=PageSubTitle><meta property=og:site_name content=Notes in progress><meta property=og:type content=article><script type=application/ld+json>
-  {"@type":"BlogPosting","headline":"Python","dateModified":"2019-02-09T00:00:00+00:00","datePublished":"2019-02-09T00:00:00+00:00","url":PageUrl,"mainEntityOfPage":{"@type":"WebPage","@id":PageUrl},"description":"PageSubTitle","@context":"http://schema.org"}</script><link rel=stylesheet href=https://febkor.github.io/NotesInProgress/static/main.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){for(var i,t=document.getElementsByClassName("math"),n=0;n<t.length;n++)i=t[n].firstChild,t[n].tagName=="SPAN"&&katex.render(i.data,t[n],{displayMode:t[n].classList.contains("display"),throwOnError:!1})})</script><header class=site-header role=banner><div class=wrapper><a class=site-title rel=author href=https://febkor.github.io/NotesInProgress/ >Notes in Progress</a><nav class=site-nav><input type=checkbox id=nav-trigger class=nav-trigger> <label for=nav-trigger></label></nav></div></header><main class=page-content aria-label=Content><div class=wrapper><article class="post h-entry" itemscope="" itemtype=http://schema.org/BlogPosting><header class=post-header><h1 class="post-title p-name" itemprop="name headline">Python</h1></header><div class="post-content e-content" itemprop=articleBody><h1 id=data-model>Data Model</h1><p>Everything (int, float, strings, classes, functions …) is an object. No primitive types. All Python objects have:<ul><li>identity: <code>id()</code> corresponds to the memory address of the object<li>type: <code>type()</code><li>value<ul><li>mutable<ul><li>list<li>set<li>dict</ul><li>immutable<ul><li>int<li>float<li>bool<li>str<li>tuple<li>unicode</ul></ul></ul><p>The type and identity cannot change during the lifetime of an object.<p>Python variables are labels/names attached to objects, and not “boxes” of a value. Thus, you can have multiple variables refer to the same object.<p>Python objects are garbage collected using a reference-counting mechanism.<p>Reference: https://inventwithpython.com/blog/2018/02/02/the-python-data-model-explained/<p><a href=https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747>Mutability</a><p>Custom classes are generally mutable. To simulate immutability in a class, one should override attribute setting and deletion to raise exceptions.
-<div class=sourceCode id=cb1><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb1-1 title=1><span class=co># need to find out what this means</span></a>
-<a class=sourceLine id=cb1-2 title=2><span class=bu>id</span>(x)</a>
-<a class=sourceLine id=cb1-3 title=3>x <span class=kw>is</span> y</a>
-<a class=sourceLine id=cb1-4 title=4><span class=bu>type</span>(x)</a></code></pre></div><h2 id=data-model-methods>Data Model Methods</h2><p>These are also called underscore methods or dunder methods (double-underscore methods).
-<div class=sourceCode id=cb2><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb2-1 title=1><span class=fu>__new__</span>()</a>
-<a class=sourceLine id=cb2-2 title=2><span class=fu>__init__</span>()</a>
-<a class=sourceLine id=cb2-3 title=3><span class=fu>__del__</span>()</a>
-<a class=sourceLine id=cb2-4 title=4><span class=fu>__repr__</span>()</a>
-<a class=sourceLine id=cb2-5 title=5><span class=fu>__str__</span>()</a>
-<a class=sourceLine id=cb2-6 title=6><span class=fu>__eq__</span>(<span class=va>self</span>, other) <span class=co># lt, le, eq, ne, gt, ge</span></a>
-<a class=sourceLine id=cb2-7 title=7><span class=fu>__hash__</span>()</a>
-<a class=sourceLine id=cb2-8 title=8>__bool__()</a>
-<a class=sourceLine id=cb2-9 title=9></a>
-<a class=sourceLine id=cb2-10 title=10><span class=co># Emulating callable objects</span></a>
-<a class=sourceLine id=cb2-11 title=11><span class=co># Allows the object to be called as a function</span></a>
-<a class=sourceLine id=cb2-12 title=12><span class=fu>__call__</span>()</a>
-<a class=sourceLine id=cb2-13 title=13></a>
-<a class=sourceLine id=cb2-14 title=14><span class=co># eg</span></a>
-<a class=sourceLine id=cb2-15 title=15>p1 <span class=op>=</span> Polynomial(<span class=dv>1</span>,<span class=dv>2</span>) <span class=co># 1 + 2x</span></a>
-<a class=sourceLine id=cb2-16 title=16>p1(<span class=dv>3</span>) <span class=co># 7</span></a>
-<a class=sourceLine id=cb2-17 title=17></a>
-<a class=sourceLine id=cb2-18 title=18><span class=co># Emulating container types</span></a>
-<a class=sourceLine id=cb2-19 title=19><span class=fu>__len__</span>()</a>
-<a class=sourceLine id=cb2-20 title=20><span class=fu>__getitem__</span>() <span class=co># self[key]</span></a>
-<a class=sourceLine id=cb2-21 title=21><span class=fu>__setitem__</span>()</a>
-<a class=sourceLine id=cb2-22 title=22><span class=fu>__delitem__</span>()</a>
-<a class=sourceLine id=cb2-23 title=23><span class=fu>__iter__</span>()</a>
-<a class=sourceLine id=cb2-24 title=24><span class=fu>__contains__</span>()</a>
-<a class=sourceLine id=cb2-25 title=25></a>
-<a class=sourceLine id=cb2-26 title=26><span class=co># Emulating numeric types</span></a>
-<a class=sourceLine id=cb2-27 title=27><span class=co># +, -, *, @, /, //, %, divmod(), pow(), **, &lt;&lt;, >>, &amp;, ^, |</span></a>
-<a class=sourceLine id=cb2-28 title=28></a>
-<a class=sourceLine id=cb2-29 title=29><span class=fu>__add__</span>() <span class=co># x+y</span></a></code></pre></div><p>https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types<h1 id=operators>Operators</h1>
-<div class=sourceCode id=cb3><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb3-1 title=1><span class=kw>not</span></a>
-<a class=sourceLine id=cb3-2 title=2><span class=kw>and</span></a>
-<a class=sourceLine id=cb3-3 title=3><span class=kw>or</span></a>
-<a class=sourceLine id=cb3-4 title=4></a>
-<a class=sourceLine id=cb3-5 title=5><span class=co># Bitwise Operators</span></a>
-<a class=sourceLine id=cb3-6 title=6>x <span class=op>&lt;&lt;</span> y <span class=co># left shift</span></a>
-<a class=sourceLine id=cb3-7 title=7>x <span class=op>>></span> y <span class=co># right shift</span></a>
-<a class=sourceLine id=cb3-8 title=8>x <span class=op>&amp;</span> y <span class=co># and</span></a>
-<a class=sourceLine id=cb3-9 title=9>x <span class=op>|</span> y <span class=co># or</span></a>
-<a class=sourceLine id=cb3-10 title=10>x <span class=op>^</span> y <span class=co># xor</span></a>
-<a class=sourceLine id=cb3-11 title=11><span class=op>~</span> x <span class=co># complement, same as -x - 1. </span></a></code></pre></div><h1 id=control-structures>Control Structures</h1><h2 id=conditional-operator-ternary>Conditional Operator (Ternary)</h2><p><code>a if condition else b</code><h2 id=generators>Generators</h2>
-<div class=sourceCode id=cb4><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb4-1 title=1><span class=kw>def</span> infinite_sequence():</a>
-<a class=sourceLine id=cb4-2 title=2>    num <span class=op>=</span> <span class=dv>0</span></a>
-<a class=sourceLine id=cb4-3 title=3>    <span class=cf>while</span> <span class=va>True</span>:</a>
-<a class=sourceLine id=cb4-4 title=4>        <span class=cf>yield</span> num</a>
-<a class=sourceLine id=cb4-5 title=5>        num <span class=op>+=</span> <span class=dv>1</span></a>
-<a class=sourceLine id=cb4-6 title=6></a>
-<a class=sourceLine id=cb4-7 title=7><span class=cf>for</span> n <span class=kw>in</span> infinite_sequence:</a>
-<a class=sourceLine id=cb4-8 title=8>    <span class=cf>pass</span></a>
-<a class=sourceLine id=cb4-9 title=9><span class=co># OR</span></a>
-<a class=sourceLine id=cb4-10 title=10>seq <span class=op>=</span> infinite_sequence()</a>
-<a class=sourceLine id=cb4-11 title=11>n <span class=op>=</span> <span class=bu>next</span>(seq)</a>
-<a class=sourceLine id=cb4-12 title=12></a>
-<a class=sourceLine id=cb4-13 title=13><span class=co># generator expression/comprehension</span></a>
-<a class=sourceLine id=cb4-14 title=14>file_gen <span class=op>=</span> (row <span class=cf>for</span> row <span class=kw>in</span> <span class=bu>open</span>(file_name)) <span class=co># returns a generator object</span></a></code></pre></div><h1 id=functions>Functions</h1>
-<div class=sourceCode id=cb5><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb5-1 title=1></a>
-<a class=sourceLine id=cb5-2 title=2><span class=bu>filter</span>(function: x <span class=op>-></span> <span class=bu>bool</span>, iterator) <span class=op>-></span> iterator</a>
-<a class=sourceLine id=cb5-3 title=3><span class=bu>map</span>(function, iterator, ...) <span class=op>-></span> iterator</a></code></pre></div><h1 id=data-types>Data Types</h1><h2 id=strings>Strings</h2><h3 id=built-in-constants>Built-in Constants</h3>
-<div class=sourceCode id=cb6><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb6-1 title=1><span class=co># import string</span></a>
-<a class=sourceLine id=cb6-2 title=2>string.ascii_letters</a>
-<a class=sourceLine id=cb6-3 title=3>string.ascii_lowercase</a>
-<a class=sourceLine id=cb6-4 title=4>string.ascii_uppercase</a>
-<a class=sourceLine id=cb6-5 title=5>string.digits</a>
-<a class=sourceLine id=cb6-6 title=6>string.hexdigits</a>
-<a class=sourceLine id=cb6-7 title=7>string.octdigits</a>
-<a class=sourceLine id=cb6-8 title=8>string.punctuation</a>
-<a class=sourceLine id=cb6-9 title=9>string.printable</a>
-<a class=sourceLine id=cb6-10 title=10>string.whitespace</a></code></pre></div><h3 id=functions-1>Functions</h3>
-<div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb7-1 title=1><span class=bu>str</span>()</a>
-<a class=sourceLine id=cb7-2 title=2><span class=bu>len</span>()</a>
-<a class=sourceLine id=cb7-3 title=3><span class=bu>ord</span>(<span class=st>'c'</span>) <span class=co># gives the ascii value of a char/str</span></a>
-<a class=sourceLine id=cb7-4 title=4><span class=bu>chr</span>(asciiCode) <span class=co># the char associated with an ascii code</span></a></code></pre></div><h3 id=methods>Methods</h3>
-<div class=sourceCode id=cb8><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb8-1 title=1></a>
-<a class=sourceLine id=cb8-2 title=2>s.replace(<span class=st>"x"</span>,<span class=st>"why"</span>)</a>
-<a class=sourceLine id=cb8-3 title=3>s.startswith(<span class=st>"begin"</span>)</a>
-<a class=sourceLine id=cb8-4 title=4>s.endswith(<span class=st>"end"</span>)</a>
-<a class=sourceLine id=cb8-5 title=5>s.find(<span class=st>"this"</span>) <span class=co># -1 if not found, else index</span></a>
-<a class=sourceLine id=cb8-6 title=6>s.index(<span class=st>"this"</span>) <span class=co># ValueError if not found</span></a>
-<a class=sourceLine id=cb8-7 title=7>s.count(<span class=st>"this"</span>)</a>
-<a class=sourceLine id=cb8-8 title=8></a>
-<a class=sourceLine id=cb8-9 title=9><span class=co># case</span></a>
-<a class=sourceLine id=cb8-10 title=10>s.upper()</a>
-<a class=sourceLine id=cb8-11 title=11>s.lower()</a>
-<a class=sourceLine id=cb8-12 title=12>s.title()</a>
-<a class=sourceLine id=cb8-13 title=13>s.casefold()</a>
-<a class=sourceLine id=cb8-14 title=14>s.swapcase()</a>
-<a class=sourceLine id=cb8-15 title=15></a>
-<a class=sourceLine id=cb8-16 title=16><span class=co># iterables</span></a>
-<a class=sourceLine id=cb8-17 title=17>s.join(iterable)</a>
-<a class=sourceLine id=cb8-18 title=18>s.split(sep<span class=op>=</span><span class=va>None</span>,maxsplit<span class=op>=-</span><span class=dv>1</span>) <span class=co># -> List</span></a>
-<a class=sourceLine id=cb8-19 title=19>s.splitlines() <span class=co># -> List</span></a>
-<a class=sourceLine id=cb8-20 title=20></a>
-<a class=sourceLine id=cb8-21 title=21><span class=co># classification</span></a>
-<a class=sourceLine id=cb8-22 title=22>s.isdigit() <span class=co># e.g. s = "1234"</span></a>
-<a class=sourceLine id=cb8-23 title=23></a>
-<a class=sourceLine id=cb8-24 title=24><span class=co># formatting</span></a>
-<a class=sourceLine id=cb8-25 title=25>s.center(width<span class=op>=</span>?[,fillchar<span class=op>=</span><span class=st>" "</span>])</a></code></pre></div><h1 id=data-structures>Data Structures</h1><h2 id=tuples>Tuples</h2><p>Features:<ul><li>immutable<li>fixed size<li>typically faster than lists</ul><h2 id=lists>Lists</h2><p>Features:<ul><li>mutable<li>dynamic</ul>
-<div class=sourceCode id=cb9><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb9-1 title=1>ls <span class=op>=</span> [<span class=dv>1</span>,<span class=dv>2</span>]</a>
-<a class=sourceLine id=cb9-2 title=2>ls.append(<span class=dv>3</span>) <span class=co># [1,2,3]</span></a>
-<a class=sourceLine id=cb9-3 title=3>ls.append([<span class=dv>3</span>,<span class=dv>4</span>]) <span class=co># [1,2,[3,4]]</span></a>
-<a class=sourceLine id=cb9-4 title=4></a>
-<a class=sourceLine id=cb9-5 title=5>ls.extend(<span class=dv>3</span>) <span class=co># [1,2,3]</span></a>
-<a class=sourceLine id=cb9-6 title=6>ls.extend([<span class=dv>3</span>,<span class=dv>4</span>]) <span class=co># [1,2,3,4]</span></a>
-<a class=sourceLine id=cb9-7 title=7></a>
-<a class=sourceLine id=cb9-8 title=8>ls <span class=op>+=</span> ls <span class=op>+</span> [<span class=dv>3</span>,<span class=dv>4</span>] <span class=co># same as extend (but not in-place)</span></a>
-<a class=sourceLine id=cb9-9 title=9></a>
-<a class=sourceLine id=cb9-10 title=10>elem <span class=kw>in</span> ls <span class=co># -> bool</span></a>
-<a class=sourceLine id=cb9-11 title=11>ls.insert(index, elem) <span class=co># shifts other elements to the right</span></a>
-<a class=sourceLine id=cb9-12 title=12>idx <span class=op>=</span> ls.index(elem) <span class=co># searching from the start of the list (/throws a ValueError)</span></a>
-<a class=sourceLine id=cb9-13 title=13>ls.remove(elem) <span class=co># removes the element's first instance (/throws ValueError)</span></a>
-<a class=sourceLine id=cb9-14 title=14>ls.sort() <span class=co># in-place</span></a>
-<a class=sourceLine id=cb9-15 title=15>ls.reverse() <span class=co># in-place</span></a>
-<a class=sourceLine id=cb9-16 title=16>elem <span class=op>=</span> ls.pop(index<span class=op>=</span><span class=va>None</span>) <span class=co># removes from the given index (/returns the rightmost element)</span></a></code></pre></div><h2 id=dictionaries>Dictionaries</h2><p>This construct is used extensively in the Python internals eg. class attributes and variables in a stack frame.
-<div class=sourceCode id=cb10><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb10-1 title=1>d <span class=op>=</span> {} <span class=co># init an empty dict</span></a>
-<a class=sourceLine id=cb10-2 title=2>d <span class=op>=</span> {<span class=st>'a'</span>: <span class=dv>1</span>, <span class=st>'b'</span>: <span class=dv>2</span>}</a>
-<a class=sourceLine id=cb10-3 title=3></a>
-<a class=sourceLine id=cb10-4 title=4>d[<span class=st>'a'</span>]  <span class=co># access a value with a key</span></a>
-<a class=sourceLine id=cb10-5 title=5>d[<span class=st>'b'</span>] <span class=op>=</span> <span class=dv>3</span> <span class=co># modify</span></a>
-<a class=sourceLine id=cb10-6 title=6>d[<span class=st>'c'</span>] <span class=op>=</span> <span class=dv>4</span>  <span class=co># add</span></a>
-<a class=sourceLine id=cb10-7 title=7>d.get(<span class=st>'z'</span>) <span class=co># returns None if key DNE</span></a>
-<a class=sourceLine id=cb10-8 title=8>d.get(<span class=st>'z'</span>, <span class=dv>0</span>) <span class=co># returns 0 if key DNE</span></a>
-<a class=sourceLine id=cb10-9 title=9></a>
-<a class=sourceLine id=cb10-10 title=10><span class=bu>len</span>(d) <span class=co># number of keys in d</span></a>
-<a class=sourceLine id=cb10-11 title=11><span class=co>'a'</span> <span class=kw>in</span> d <span class=co># test if key exists in d</span></a>
-<a class=sourceLine id=cb10-12 title=12></a>
-<a class=sourceLine id=cb10-13 title=13>d.items() <span class=co># returns (key, value) iterator</span></a>
-<a class=sourceLine id=cb10-14 title=14>d.keys() <span class=co># returns keys iterator</span></a>
-<a class=sourceLine id=cb10-15 title=15>d.values() <span class=co># returns values iterator</span></a></code></pre></div><h2 id=sets>Sets</h2><p>A set is an unordered “bag” of unique values. A single set can contain values of any immutable datatype. Once you have two sets, you can do standard set operations like union, intersection, and set difference. Implemented as a class.
-<div class=sourceCode id=cb11><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb11-1 title=1>a_set <span class=op>=</span> {<span class=dv>1</span>, <span class=dv>2</span>} </a>
-<a class=sourceLine id=cb11-2 title=2>a_list <span class=op>=</span> [<span class=st>'a'</span>, <span class=st>'hi'</span>, <span class=va>True</span>, <span class=dv>42</span>]</a>
-<a class=sourceLine id=cb11-3 title=3>a_set <span class=op>=</span> <span class=bu>set</span>(a_list) <span class=co># constructor</span></a>
-<a class=sourceLine id=cb11-4 title=4><span class=co># a_set will be unordered</span></a>
-<a class=sourceLine id=cb11-5 title=5></a>
-<a class=sourceLine id=cb11-6 title=6>empty <span class=op>=</span> <span class=bu>set</span>()</a>
-<a class=sourceLine id=cb11-7 title=7></a>
-<a class=sourceLine id=cb11-8 title=8>a_set.add(<span class=dv>3</span>)</a>
-<a class=sourceLine id=cb11-9 title=9>a_set.update({<span class=dv>3</span>,<span class=dv>4</span>,<span class=dv>5</span>}) <span class=co># adds each element to set</span></a>
-<a class=sourceLine id=cb11-10 title=10>a_set.update([<span class=dv>5</span>,<span class=dv>6</span>,<span class=dv>7</span>]) <span class=co># same</span></a>
-<a class=sourceLine id=cb11-11 title=11></a>
-<a class=sourceLine id=cb11-12 title=12>a_set.discard(<span class=dv>6</span>)</a>
-<a class=sourceLine id=cb11-13 title=13>a_set.remove(<span class=dv>5</span>) <span class=co># raises `KeyError` exception if the value doesn't exist</span></a>
-<a class=sourceLine id=cb11-14 title=14></a>
-<a class=sourceLine id=cb11-15 title=15>a_set.pop() <span class=co># removes and returns one value</span></a>
-<a class=sourceLine id=cb11-16 title=16>a_set.clear() <span class=co># empties the set</span></a>
-<a class=sourceLine id=cb11-17 title=17></a>
-<a class=sourceLine id=cb11-18 title=18>a_set.union(b_set)  </a>
-<a class=sourceLine id=cb11-19 title=19>a_set.intersection(b_set) </a>
-<a class=sourceLine id=cb11-20 title=20>a_set.difference(b_set) <span class=co># a minus whatever's in b</span></a>
-<a class=sourceLine id=cb11-21 title=21>a_set.symmetric_difference(b_set) <span class=co># returns elements in exactly one of the sets</span></a>
-<a class=sourceLine id=cb11-22 title=22></a>
-<a class=sourceLine id=cb11-23 title=23>a_set.issubset(b_set) </a>
-<a class=sourceLine id=cb11-24 title=24>b_set.issuperset(a_set) </a></code></pre></div><h2 id=collections-module>Collections module</h2><p>The <code>collections</code> module provides specialized data structures.<ul><li><code>collections.OrderedDict</code><ul><li>remembers the insertion order of keys</ul><li><code>collections.defaultdict</code><ul><li>return default values for missing keys<li>accessing a missing key creates and initializes it<li><code>dd = collections.defaultdict(list)</code><li><code>dd["planets"].append("Mars")</code></ul><li><code>collections.ChainMap</code><ul><li>search multiple dictionaries as a single mapping<li>groups multiple dictionaries into a single mapping<li>lookups search the underlying mappings one by one until a key is found<li>insertions, updates, and deletions only affect the first mapping added to the chain<li><code>chain = collections.ChainMap(dict1, dict2)</code></ul></ul><p>Note that <code>defaultdict</code> is all lower case, and not camel case, for historical reasons.<h2 id=enum>Enum</h2><h2 id=types-module>Types module</h2><dl><dt><code>types.MappingProxyType</code><dd>A wrapper for creating a read-only view into dictionaries</dl><p><code>read_only = types.MappingProxyType(dict1)</code><h1 id=file-io>File IO</h1>
-<div class=sourceCode id=cb12><pre class="sourceCode python"><code class="sourceCode python"><a class=sourceLine id=cb12-1 title=1><span class=cf>with</span> <span class=bu>open</span>(filepath, mode<span class=op>=</span><span class=st>'r'</span>) <span class=im>as</span> <span class=bu>file</span>:</a>
-<a class=sourceLine id=cb12-2 title=2>    <span class=co>'''r,w (overwrite),rb,wb '''</span></a>
-<a class=sourceLine id=cb12-3 title=3>    <span class=bu>file</span>.read(size<span class=op>=-</span><span class=dv>1</span>) <span class=co># -> str; bytes, default whole file</span></a>
-<a class=sourceLine id=cb12-4 title=4>    <span class=co># returns '' at EOF</span></a>
-<a class=sourceLine id=cb12-5 title=5>    <span class=bu>file</span>.readline(size<span class=op>=-</span><span class=dv>1</span>) <span class=co># -> str; characters, default whole line</span></a>
-<a class=sourceLine id=cb12-6 title=6>    <span class=bu>file</span>.readlines() <span class=co># -> list(str); reads remaining lines</span></a>
-<a class=sourceLine id=cb12-7 title=7></a>
-<a class=sourceLine id=cb12-8 title=8>    <span class=cf>for</span> line <span class=kw>in</span> <span class=bu>file</span>:</a>
-<a class=sourceLine id=cb12-9 title=9>        <span class=bu>print</span>(line, end<span class=op>=</span><span class=st>''</span>)</a>
-<a class=sourceLine id=cb12-10 title=10></a>
-<a class=sourceLine id=cb12-11 title=11><span class=cf>with</span> <span class=bu>open</span>(outfile, <span class=st>'w'</span>) <span class=im>as</span> out:</a>
-<a class=sourceLine id=cb12-12 title=12>    out.write(string)</a>
-<a class=sourceLine id=cb12-13 title=13>    out.writelines(stringlist)</a></code></pre></div><h2 id=general-references>General References</h2><p>https://dbader.org/blog/python-dictionaries-maps-and-hashtables</div><a class=u-url href=Python hidden=""></a></article></div></main><footer class="site-footer h-card"><data class=u-url href=/ ></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor<li><a class=u-email href=""></a></ul></div></div><div class="footer-col footer-col-3"><p></div></div></footer>
+<!DOCTYPE html><html lang=en><head><meta http-equiv=content-type content="text/html; charset=UTF-8"><meta name=viewport content="width=device-width, initial-scale=1"><title>Python | Notes in Progress</title><meta property=og:title content=Python><meta property=og:site_name content=Notes in progress><meta property=og:type content=article><script type=application/ld+json>
+  {"@type":"BlogPosting","headline":"Notes in Progress","dateModified":"2019-02-09T00:00:00+00:00","datePublished":"2019-02-09T00:00:00+00:00","url":https://febkor.github.io/NotesInProgress,"mainEntityOfPage":{"@type":"WebPage","@id":https://febkor.github.io/NotesInProgress},"description":"Notes","@context":"http://schema.org"}</script><link rel=stylesheet href=https://febkor.github.io/NotesInProgress/static/main.css><link rel="shortcut icon" type=image/x-icon href=https://febkor.github.io/NotesInProgress/static/favicon.ico><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script></head><body><header class=site-header role=banner><div class=wrapper><a class=site-title rel=author href=https://febkor.github.io/NotesInProgress>Notes in Progress</a><nav class=site-nav><input type=checkbox id=nav-trigger class=nav-trigger><label for=nav-trigger></label></nav></div></header><main class=page-content aria-label=Content><div class=wrapper><article class="post h-entry" itemscope itemtype=http://schema.org/BlogPosting><header class=post-header><h1 class="post-title p-name" itemprop="name headline">Python</h1></header><div class="post-content e-content" itemprop=articleBody><h1 id=data-model>Data Model</h1><p>Everything (int, float, strings, classes, functions, &#x2026;) is an object. No primitive types. All Python objects have:</p><ul><li>identity: <code>id()</code> corresponds to the memory address of the object</li><li>type: <code>type()</code>, <code>x is type(x)</code></li><li>value <ul><li>mutable <ul><li>list</li><li>set</li><li>dict</li></ul></li><li>immutable <ul><li>int</li><li>float</li><li>bool</li><li>str</li><li>tuple</li><li>unicode</li></ul></li></ul></li></ul><p>The type and identity cannot change during the lifetime of an object.</p><p>Python variables are labels/names attached to objects, and not &#x201C;boxes&#x201D; of a value. Thus, you can have multiple variables refer to the same object.</p><p>Python objects are garbage collected using a reference-counting mechanism.</p><p><a href=https://inventwithpython.com/blog/2018/02/02/the-python-data-model-explained/ >Reference</a></p><p><a href=https://medium.com/@meghamohan/mutable-and-immutable-side-of-python-c2145cf72747>Mutability</a></p><p>Custom classes are generally mutable. To simulate immutability in a class, one should override attribute setting and deletion to raise exceptions.</p><h2 id=data-model-methods>Data Model Methods</h2><p>These are also called underscore methods or dunder methods (double-underscore methods).</p><div class=sourceCode id=cb1><pre class="sourceCode python"><code class="sourceCode python"><span id=cb1-1><a href=#cb1-1></a><span class=fu>__new__</span>()</span>
+<span id=cb1-2><a href=#cb1-2></a><span class=fu>__init__</span>()</span>
+<span id=cb1-3><a href=#cb1-3></a><span class=fu>__del__</span>()</span>
+<span id=cb1-4><a href=#cb1-4></a><span class=fu>__repr__</span>()</span>
+<span id=cb1-5><a href=#cb1-5></a><span class=fu>__str__</span>()</span>
+<span id=cb1-6><a href=#cb1-6></a><span class=fu>__eq__</span>(<span class=va>self</span>, other) <span class=co># lt, le, eq, ne, gt, ge</span></span>
+<span id=cb1-7><a href=#cb1-7></a><span class=fu>__hash__</span>()</span>
+<span id=cb1-8><a href=#cb1-8></a>__bool__()</span>
+<span id=cb1-9><a href=#cb1-9></a></span>
+<span id=cb1-10><a href=#cb1-10></a><span class=co># Emulating callable objects</span></span>
+<span id=cb1-11><a href=#cb1-11></a><span class=co># Allows the object to be called as a function</span></span>
+<span id=cb1-12><a href=#cb1-12></a><span class=fu>__call__</span>()</span>
+<span id=cb1-13><a href=#cb1-13></a></span>
+<span id=cb1-14><a href=#cb1-14></a><span class=co># eg</span></span>
+<span id=cb1-15><a href=#cb1-15></a>p1 <span class=op>=</span> Polynomial(<span class=dv>1</span>,<span class=dv>2</span>) <span class=co># 1 + 2x</span></span>
+<span id=cb1-16><a href=#cb1-16></a>p1(<span class=dv>3</span>) <span class=co># 7</span></span>
+<span id=cb1-17><a href=#cb1-17></a></span>
+<span id=cb1-18><a href=#cb1-18></a><span class=co># Emulating container types</span></span>
+<span id=cb1-19><a href=#cb1-19></a><span class=fu>__len__</span>()</span>
+<span id=cb1-20><a href=#cb1-20></a><span class=fu>__getitem__</span>() <span class=co># self[key]</span></span>
+<span id=cb1-21><a href=#cb1-21></a><span class=fu>__setitem__</span>()</span>
+<span id=cb1-22><a href=#cb1-22></a><span class=fu>__delitem__</span>()</span>
+<span id=cb1-23><a href=#cb1-23></a><span class=fu>__iter__</span>()</span>
+<span id=cb1-24><a href=#cb1-24></a><span class=fu>__contains__</span>()</span>
+<span id=cb1-25><a href=#cb1-25></a></span>
+<span id=cb1-26><a href=#cb1-26></a><span class=co># Emulating numeric types</span></span>
+<span id=cb1-27><a href=#cb1-27></a><span class=co># +, -, *, @, /, //, %, divmod(), pow(), **, &lt;&lt;, &gt;&gt;, &amp;, ^, |</span></span>
+<span id=cb1-28><a href=#cb1-28></a></span>
+<span id=cb1-29><a href=#cb1-29></a><span class=fu>__add__</span>() <span class=co># x+y</span></span></code></pre></div><p>https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types</p><h1 id=operators>Operators</h1><div class=sourceCode id=cb2><pre class="sourceCode python"><code class="sourceCode python"><span id=cb2-1><a href=#cb2-1></a><span class=kw>not</span></span>
+<span id=cb2-2><a href=#cb2-2></a><span class=kw>and</span></span>
+<span id=cb2-3><a href=#cb2-3></a><span class=kw>or</span></span>
+<span id=cb2-4><a href=#cb2-4></a></span>
+<span id=cb2-5><a href=#cb2-5></a><span class=co># Bitwise Operators</span></span>
+<span id=cb2-6><a href=#cb2-6></a>x <span class=op>&lt;&lt;</span> y <span class=co># left shift</span></span>
+<span id=cb2-7><a href=#cb2-7></a>x <span class=op>&gt;&gt;</span> y <span class=co># right shift</span></span>
+<span id=cb2-8><a href=#cb2-8></a>x <span class=op>&amp;</span> y <span class=co># and</span></span>
+<span id=cb2-9><a href=#cb2-9></a>x <span class=op>|</span> y <span class=co># or</span></span>
+<span id=cb2-10><a href=#cb2-10></a>x <span class=op>^</span> y <span class=co># xor</span></span>
+<span id=cb2-11><a href=#cb2-11></a><span class=op>~</span> x <span class=co># complement, same as -x - 1. </span></span></code></pre></div><h1 id=control-structures>Control Structures</h1><h2 id=conditional-operator-ternary>Conditional Operator (Ternary)</h2><p><code>a if condition else b</code></p><h2 id=generators>Generators</h2><div class=sourceCode id=cb3><pre class="sourceCode python"><code class="sourceCode python"><span id=cb3-1><a href=#cb3-1></a><span class=kw>def</span> infinite_sequence():</span>
+<span id=cb3-2><a href=#cb3-2></a>    num <span class=op>=</span> <span class=dv>0</span></span>
+<span id=cb3-3><a href=#cb3-3></a>    <span class=cf>while</span> <span class=va>True</span>:</span>
+<span id=cb3-4><a href=#cb3-4></a>        <span class=cf>yield</span> num</span>
+<span id=cb3-5><a href=#cb3-5></a>        num <span class=op>+=</span> <span class=dv>1</span></span>
+<span id=cb3-6><a href=#cb3-6></a></span>
+<span id=cb3-7><a href=#cb3-7></a><span class=cf>for</span> n <span class=kw>in</span> infinite_sequence:</span>
+<span id=cb3-8><a href=#cb3-8></a>    <span class=cf>pass</span></span>
+<span id=cb3-9><a href=#cb3-9></a><span class=co># OR</span></span>
+<span id=cb3-10><a href=#cb3-10></a>seq <span class=op>=</span> infinite_sequence()</span>
+<span id=cb3-11><a href=#cb3-11></a>n <span class=op>=</span> <span class=bu>next</span>(seq)</span>
+<span id=cb3-12><a href=#cb3-12></a></span>
+<span id=cb3-13><a href=#cb3-13></a><span class=co># generator expression/comprehension</span></span>
+<span id=cb3-14><a href=#cb3-14></a>file_gen <span class=op>=</span> (row <span class=cf>for</span> row <span class=kw>in</span> <span class=bu>open</span>(file_name)) <span class=co># returns a generator object</span></span></code></pre></div><h1 id=functions>Functions</h1><div class=sourceCode id=cb4><pre class="sourceCode python"><code class="sourceCode python"><span id=cb4-1><a href=#cb4-1></a></span>
+<span id=cb4-2><a href=#cb4-2></a><span class=bu>filter</span>(function: x <span class=op>-&gt;</span> <span class=bu>bool</span>, iterator) <span class=op>-&gt;</span> iterator</span>
+<span id=cb4-3><a href=#cb4-3></a><span class=bu>map</span>(function, iterator, ...) <span class=op>-&gt;</span> iterator</span></code></pre></div><h2 id=decorators>Decorators</h2><p>Easy way to add functionality to a function</p><div class=sourceCode id=cb5><pre class="sourceCode python"><code class="sourceCode python"><span id=cb5-1><a href=#cb5-1></a></span>
+<span id=cb5-2><a href=#cb5-2></a><span class=kw>def</span> double(func):</span>
+<span id=cb5-3><a href=#cb5-3></a>    <span class=kw>def</span> decorated_func(<span class=op>*</span>args, <span class=op>**</span>kwargs):</span>
+<span id=cb5-4><a href=#cb5-4></a>        <span class=cf>return</span> <span class=dv>2</span> <span class=op>*</span> func(<span class=op>*</span>args, <span class=op>**</span>kwargs)</span>
+<span id=cb5-5><a href=#cb5-5></a>    <span class=cf>return</span> decorated_func</span>
+<span id=cb5-6><a href=#cb5-6></a></span>
+<span id=cb5-7><a href=#cb5-7></a><span class=at>@double</span></span>
+<span id=cb5-8><a href=#cb5-8></a><span class=kw>def</span> square(x):</span>
+<span id=cb5-9><a href=#cb5-9></a>    <span class=cf>return</span> x<span class=op>*</span>x</span>
+<span id=cb5-10><a href=#cb5-10></a></span>
+<span id=cb5-11><a href=#cb5-11></a><span class=co># equiv to</span></span>
+<span id=cb5-12><a href=#cb5-12></a><span class=co># square = double(square)</span></span>
+<span id=cb5-13><a href=#cb5-13></a></span>
+<span id=cb5-14><a href=#cb5-14></a>square(<span class=dv>3</span>) <span class=co># -&gt; 18</span></span></code></pre></div><h1 id=data-types>Data Types</h1><h2 id=strings>Strings</h2><h3 id=built-in-constants>Built-in Constants</h3><div class=sourceCode id=cb6><pre class="sourceCode python"><code class="sourceCode python"><span id=cb6-1><a href=#cb6-1></a><span class=co># import string</span></span>
+<span id=cb6-2><a href=#cb6-2></a>string.ascii_letters</span>
+<span id=cb6-3><a href=#cb6-3></a>string.ascii_lowercase</span>
+<span id=cb6-4><a href=#cb6-4></a>string.ascii_uppercase</span>
+<span id=cb6-5><a href=#cb6-5></a>string.digits</span>
+<span id=cb6-6><a href=#cb6-6></a>string.hexdigits</span>
+<span id=cb6-7><a href=#cb6-7></a>string.octdigits</span>
+<span id=cb6-8><a href=#cb6-8></a>string.punctuation</span>
+<span id=cb6-9><a href=#cb6-9></a>string.printable</span>
+<span id=cb6-10><a href=#cb6-10></a>string.whitespace</span></code></pre></div><h3 id=functions-1>Functions</h3><div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><span id=cb7-1><a href=#cb7-1></a><span class=bu>str</span>()</span>
+<span id=cb7-2><a href=#cb7-2></a><span class=bu>len</span>()</span>
+<span id=cb7-3><a href=#cb7-3></a><span class=bu>ord</span>(<span class=st>&#39;c&#39;</span>) <span class=co># gives the ascii value of a char/str</span></span>
+<span id=cb7-4><a href=#cb7-4></a><span class=bu>chr</span>(asciiCode) <span class=co># the char associated with an ascii code</span></span></code></pre></div><h3 id=methods>Methods</h3><div class=sourceCode id=cb8><pre class="sourceCode python"><code class="sourceCode python"><span id=cb8-1><a href=#cb8-1></a></span>
+<span id=cb8-2><a href=#cb8-2></a>s.replace(<span class=st>&quot;x&quot;</span>,<span class=st>&quot;why&quot;</span>)</span>
+<span id=cb8-3><a href=#cb8-3></a>s.startswith(<span class=st>&quot;begin&quot;</span>)</span>
+<span id=cb8-4><a href=#cb8-4></a>s.endswith(<span class=st>&quot;end&quot;</span>)</span>
+<span id=cb8-5><a href=#cb8-5></a>s.find(<span class=st>&quot;this&quot;</span>) <span class=co># -1 if not found, else index</span></span>
+<span id=cb8-6><a href=#cb8-6></a>s.index(<span class=st>&quot;this&quot;</span>) <span class=co># ValueError if not found</span></span>
+<span id=cb8-7><a href=#cb8-7></a>s.count(<span class=st>&quot;this&quot;</span>)</span>
+<span id=cb8-8><a href=#cb8-8></a></span>
+<span id=cb8-9><a href=#cb8-9></a><span class=co>&quot; eg... &quot;</span>.strip(<span class=st>&quot; .,&quot;</span>) <span class=co># removes specified chars. Default &#39; &#39;.</span></span>
+<span id=cb8-10><a href=#cb8-10></a>s.lstrip()</span>
+<span id=cb8-11><a href=#cb8-11></a>s.rstrip()</span>
+<span id=cb8-12><a href=#cb8-12></a></span>
+<span id=cb8-13><a href=#cb8-13></a><span class=co># case</span></span>
+<span id=cb8-14><a href=#cb8-14></a>s.upper()</span>
+<span id=cb8-15><a href=#cb8-15></a>s.lower()</span>
+<span id=cb8-16><a href=#cb8-16></a>s.title()</span>
+<span id=cb8-17><a href=#cb8-17></a>s.casefold()</span>
+<span id=cb8-18><a href=#cb8-18></a>s.swapcase()</span>
+<span id=cb8-19><a href=#cb8-19></a></span>
+<span id=cb8-20><a href=#cb8-20></a><span class=co># iterables</span></span>
+<span id=cb8-21><a href=#cb8-21></a>s.join(iterable)</span>
+<span id=cb8-22><a href=#cb8-22></a>s.split(sep<span class=op>=</span><span class=va>None</span>,maxsplit<span class=op>=-</span><span class=dv>1</span>) <span class=co># -&gt; List</span></span>
+<span id=cb8-23><a href=#cb8-23></a>s.splitlines() <span class=co># -&gt; List</span></span>
+<span id=cb8-24><a href=#cb8-24></a></span>
+<span id=cb8-25><a href=#cb8-25></a><span class=co># classification</span></span>
+<span id=cb8-26><a href=#cb8-26></a>s.isdigit() <span class=co># e.g. s = &quot;1234&quot;</span></span>
+<span id=cb8-27><a href=#cb8-27></a></span>
+<span id=cb8-28><a href=#cb8-28></a><span class=co># formatting</span></span>
+<span id=cb8-29><a href=#cb8-29></a>s.center(width<span class=op>=</span>?[,fillchar<span class=op>=</span><span class=st>&quot; &quot;</span>])</span></code></pre></div><h1 id=data-structures>Data Structures</h1><h2 id=tuples>Tuples</h2><p>Features:</p><ul><li>immutable</li><li>fixed size</li><li>typically faster than lists</li></ul><h2 id=lists>Lists</h2><p>Features:</p><ul><li>mutable</li><li>dynamic</li></ul><div class=sourceCode id=cb9><pre class="sourceCode python"><code class="sourceCode python"><span id=cb9-1><a href=#cb9-1></a>ls <span class=op>=</span> [<span class=dv>1</span>,<span class=dv>2</span>]</span>
+<span id=cb9-2><a href=#cb9-2></a>ls.append(<span class=dv>3</span>) <span class=co># [1,2,3]</span></span>
+<span id=cb9-3><a href=#cb9-3></a>ls.append([<span class=dv>3</span>,<span class=dv>4</span>]) <span class=co># [1,2,[3,4]]</span></span>
+<span id=cb9-4><a href=#cb9-4></a></span>
+<span id=cb9-5><a href=#cb9-5></a>ls.extend(<span class=dv>3</span>) <span class=co># [1,2,3]</span></span>
+<span id=cb9-6><a href=#cb9-6></a>ls.extend([<span class=dv>3</span>,<span class=dv>4</span>]) <span class=co># [1,2,3,4]</span></span>
+<span id=cb9-7><a href=#cb9-7></a><span class=co># note extend will try do this for any iterable!</span></span>
+<span id=cb9-8><a href=#cb9-8></a></span>
+<span id=cb9-9><a href=#cb9-9></a>ls <span class=op>+=</span> [<span class=dv>3</span>,<span class=dv>4</span>] <span class=co># same as extend (but not in-place)</span></span>
+<span id=cb9-10><a href=#cb9-10></a></span>
+<span id=cb9-11><a href=#cb9-11></a>elem <span class=kw>in</span> ls <span class=co># -&gt; bool</span></span>
+<span id=cb9-12><a href=#cb9-12></a>ls.insert(index, elem) <span class=co># shifts other elements to the right</span></span>
+<span id=cb9-13><a href=#cb9-13></a>idx <span class=op>=</span> ls.index(elem) <span class=co># searching from the start of the list (/throws a ValueError)</span></span>
+<span id=cb9-14><a href=#cb9-14></a>ls.remove(elem) <span class=co># removes the element&#39;s first instance (/throws ValueError)</span></span>
+<span id=cb9-15><a href=#cb9-15></a>ls.sort() <span class=co># in-place</span></span>
+<span id=cb9-16><a href=#cb9-16></a>ls.reverse() <span class=co># in-place</span></span>
+<span id=cb9-17><a href=#cb9-17></a>elem <span class=op>=</span> ls.pop(index<span class=op>=</span><span class=va>None</span>) <span class=co># removes from the given index (/returns the rightmost element)</span></span></code></pre></div><h2 id=dictionaries>Dictionaries</h2><p>This construct is used extensively in the Python internals eg. class attributes and variables in a stack frame.</p><div class=sourceCode id=cb10><pre class="sourceCode python"><code class="sourceCode python"><span id=cb10-1><a href=#cb10-1></a>d <span class=op>=</span> {} <span class=co># init an empty dict</span></span>
+<span id=cb10-2><a href=#cb10-2></a>d <span class=op>=</span> {<span class=st>&#39;a&#39;</span>: <span class=dv>1</span>, <span class=st>&#39;b&#39;</span>: <span class=dv>2</span>}</span>
+<span id=cb10-3><a href=#cb10-3></a></span>
+<span id=cb10-4><a href=#cb10-4></a>d[<span class=st>&#39;a&#39;</span>]  <span class=co># access a value with a key</span></span>
+<span id=cb10-5><a href=#cb10-5></a>d[<span class=st>&#39;b&#39;</span>] <span class=op>=</span> <span class=dv>3</span> <span class=co># modify</span></span>
+<span id=cb10-6><a href=#cb10-6></a>d[<span class=st>&#39;c&#39;</span>] <span class=op>=</span> <span class=dv>4</span>  <span class=co># add</span></span>
+<span id=cb10-7><a href=#cb10-7></a>d.get(<span class=st>&#39;z&#39;</span>) <span class=co># returns None if key DNE</span></span>
+<span id=cb10-8><a href=#cb10-8></a>d.get(<span class=st>&#39;z&#39;</span>, <span class=dv>0</span>) <span class=co># returns 0 if key DNE</span></span>
+<span id=cb10-9><a href=#cb10-9></a></span>
+<span id=cb10-10><a href=#cb10-10></a><span class=bu>len</span>(d) <span class=co># number of keys in d</span></span>
+<span id=cb10-11><a href=#cb10-11></a><span class=co>&#39;a&#39;</span> <span class=kw>in</span> d <span class=co># test if key exists in d</span></span>
+<span id=cb10-12><a href=#cb10-12></a></span>
+<span id=cb10-13><a href=#cb10-13></a>d.items() <span class=co># returns (key, value) iterator</span></span>
+<span id=cb10-14><a href=#cb10-14></a>d.keys() <span class=co># returns keys iterator</span></span>
+<span id=cb10-15><a href=#cb10-15></a>d.values() <span class=co># returns values iterator</span></span></code></pre></div><h2 id=sets>Sets</h2><p>A set is an unordered &#x201C;bag&#x201D; of unique values. A single set can contain values of any immutable datatype. Once you have two sets, you can do standard set operations like union, intersection, and set difference. Implemented as a class.</p><div class=sourceCode id=cb11><pre class="sourceCode python"><code class="sourceCode python"><span id=cb11-1><a href=#cb11-1></a>a_set <span class=op>=</span> {<span class=dv>1</span>, <span class=dv>2</span>} </span>
+<span id=cb11-2><a href=#cb11-2></a>a_list <span class=op>=</span> [<span class=st>&#39;a&#39;</span>, <span class=st>&#39;hi&#39;</span>, <span class=va>True</span>, <span class=dv>42</span>]</span>
+<span id=cb11-3><a href=#cb11-3></a>a_set <span class=op>=</span> <span class=bu>set</span>(a_list) <span class=co># constructor</span></span>
+<span id=cb11-4><a href=#cb11-4></a><span class=co># a_set will be unordered</span></span>
+<span id=cb11-5><a href=#cb11-5></a></span>
+<span id=cb11-6><a href=#cb11-6></a>empty <span class=op>=</span> <span class=bu>set</span>()</span>
+<span id=cb11-7><a href=#cb11-7></a></span>
+<span id=cb11-8><a href=#cb11-8></a>a_set.add(<span class=dv>3</span>)</span>
+<span id=cb11-9><a href=#cb11-9></a>a_set.update({<span class=dv>3</span>,<span class=dv>4</span>,<span class=dv>5</span>}) <span class=co># adds each element to set</span></span>
+<span id=cb11-10><a href=#cb11-10></a>a_set.update([<span class=dv>5</span>,<span class=dv>6</span>,<span class=dv>7</span>]) <span class=co># same</span></span>
+<span id=cb11-11><a href=#cb11-11></a></span>
+<span id=cb11-12><a href=#cb11-12></a>a_set.discard(<span class=dv>6</span>)</span>
+<span id=cb11-13><a href=#cb11-13></a>a_set.remove(<span class=dv>5</span>) <span class=co># raises `KeyError` exception if the value doesn&#39;t exist</span></span>
+<span id=cb11-14><a href=#cb11-14></a></span>
+<span id=cb11-15><a href=#cb11-15></a>a_set.pop() <span class=co># removes and returns one value</span></span>
+<span id=cb11-16><a href=#cb11-16></a>a_set.clear() <span class=co># empties the set</span></span>
+<span id=cb11-17><a href=#cb11-17></a></span>
+<span id=cb11-18><a href=#cb11-18></a>a_set.union(b_set)  </span>
+<span id=cb11-19><a href=#cb11-19></a>a_set.intersection(b_set) </span>
+<span id=cb11-20><a href=#cb11-20></a>a_set.difference(b_set) <span class=co># a minus whatever&#39;s in b</span></span>
+<span id=cb11-21><a href=#cb11-21></a>a_set.symmetric_difference(b_set) <span class=co># returns elements in exactly one of the sets</span></span>
+<span id=cb11-22><a href=#cb11-22></a></span>
+<span id=cb11-23><a href=#cb11-23></a>a_set.issubset(b_set) </span>
+<span id=cb11-24><a href=#cb11-24></a>b_set.issuperset(a_set) </span></code></pre></div><h2 id=classes>Classes</h2><div class=sourceCode id=cb12><pre class="sourceCode python"><code class="sourceCode python"><span id=cb12-1><a href=#cb12-1></a><span class=kw>class</span> ClassName(<span class=bu>object</span>):</span>
+<span id=cb12-2><a href=#cb12-2></a>    <span class=co>&quot;&quot;&quot;docstring for ClassName&quot;&quot;&quot;</span></span>
+<span id=cb12-3><a href=#cb12-3></a>    <span class=kw>def</span> <span class=fu>__init__</span>(<span class=va>self</span>, arg):</span>
+<span id=cb12-4><a href=#cb12-4></a>        <span class=bu>super</span>(ClassName, <span class=va>self</span>).<span class=fu>__init__</span>()</span>
+<span id=cb12-5><a href=#cb12-5></a>        <span class=va>self</span>.attribute <span class=op>=</span> arg</span>
+<span id=cb12-6><a href=#cb12-6></a>         </span></code></pre></div><p>CPython stores classes as dicts. Ensure that all attributes are initialized (even if to <code>None</code>) in the constructor. This allows the runtime to use key-sharing (PEP 412): we store a reference to the key array, and create a new array for the values.</p><h1 id=file-io>File IO</h1><p>The <code>with</code> statement simplifies exception handling by encapsulating common setup and tear-down tasks in so-called context managers.</p><div class=sourceCode id=cb13><pre class="sourceCode python"><code class="sourceCode python"><span id=cb13-1><a href=#cb13-1></a><span class=cf>with</span> <span class=bu>open</span>(filepath, mode<span class=op>=</span><span class=st>&#39;r&#39;</span>) <span class=im>as</span> <span class=bu>file</span>:</span>
+<span id=cb13-2><a href=#cb13-2></a>    <span class=co>&#39;&#39;&#39;r,w (overwrite),rb,wb &#39;&#39;&#39;</span></span>
+<span id=cb13-3><a href=#cb13-3></a>    <span class=bu>file</span>.read(size<span class=op>=-</span><span class=dv>1</span>) <span class=co># -&gt; str; bytes, default whole file</span></span>
+<span id=cb13-4><a href=#cb13-4></a>    <span class=co># returns &#39;&#39; at EOF</span></span>
+<span id=cb13-5><a href=#cb13-5></a>    <span class=bu>file</span>.readline(size<span class=op>=-</span><span class=dv>1</span>) <span class=co># -&gt; str; characters, default whole line</span></span>
+<span id=cb13-6><a href=#cb13-6></a>    <span class=bu>file</span>.readlines() <span class=co># -&gt; list(str); reads remaining lines</span></span>
+<span id=cb13-7><a href=#cb13-7></a></span>
+<span id=cb13-8><a href=#cb13-8></a>    <span class=cf>for</span> line <span class=kw>in</span> <span class=bu>file</span>:</span>
+<span id=cb13-9><a href=#cb13-9></a>        <span class=bu>print</span>(line, end<span class=op>=</span><span class=st>&#39;&#39;</span>)</span>
+<span id=cb13-10><a href=#cb13-10></a></span>
+<span id=cb13-11><a href=#cb13-11></a><span class=cf>with</span> <span class=bu>open</span>(outfile, <span class=st>&#39;w&#39;</span>) <span class=im>as</span> out:</span>
+<span id=cb13-12><a href=#cb13-12></a>    out.write(string)</span>
+<span id=cb13-13><a href=#cb13-13></a>    out.writelines(stringlist)</span></code></pre></div><h1 id=errors-and-exceptions>Errors and Exceptions</h1><h2 id=handling-exceptions>Handling Exceptions</h2><div class=sourceCode id=cb14><pre class="sourceCode python"><code class="sourceCode python"><span id=cb14-1><a href=#cb14-1></a><span class=cf>try</span>:</span>
+<span id=cb14-2><a href=#cb14-2></a>    <span class=co># something </span></span>
+<span id=cb14-3><a href=#cb14-3></a><span class=cf>except</span> <span class=pp>ValueError</span>:</span>
+<span id=cb14-4><a href=#cb14-4></a>    <span class=co># then do this</span></span>
+<span id=cb14-5><a href=#cb14-5></a><span class=cf>except</span> (<span class=pp>RuntimeError</span>, <span class=pp>TypeError</span>):</span>
+<span id=cb14-6><a href=#cb14-6></a>    <span class=co># then do this</span></span>
+<span id=cb14-7><a href=#cb14-7></a>    <span class=cf>raise</span> <span class=co># don&#39;t intend on handlin the exception</span></span>
+<span id=cb14-8><a href=#cb14-8></a><span class=cf>except</span> <span class=pp>NameError</span> <span class=im>as</span> err:</span>
+<span id=cb14-9><a href=#cb14-9></a>    <span class=bu>print</span>(err.args) <span class=co># args to the exception instance</span></span>
+<span id=cb14-10><a href=#cb14-10></a><span class=cf>except</span>:</span>
+<span id=cb14-11><a href=#cb14-11></a>    <span class=co># default exception clause</span></span>
+<span id=cb14-12><a href=#cb14-12></a><span class=cf>else</span>:</span>
+<span id=cb14-13><a href=#cb14-13></a>    <span class=co># runs if `try` does not produce an exception</span></span>
+<span id=cb14-14><a href=#cb14-14></a><span class=cf>finally</span>:</span>
+<span id=cb14-15><a href=#cb14-15></a>    <span class=co># runs whether or not `try` produces an exception</span></span></code></pre></div><h2 id=raising-exceptions>Raising Exceptions</h2><div class=sourceCode id=cb15><pre class="sourceCode python"><code class="sourceCode python"><span id=cb15-1><a href=#cb15-1></a><span class=cf>raise</span> <span class=pp>ValueError</span> <span class=co># using default ctor</span></span>
+<span id=cb15-2><a href=#cb15-2></a><span class=cf>raise</span> <span class=pp>NameError</span>(<span class=st>&quot;The name doesn&#39;t exist&quot;</span>)</span>
+<span id=cb15-3><a href=#cb15-3></a>err <span class=op>=</span> <span class=pp>OSError</span>(<span class=st>&quot;This happened.&quot;</span>)</span>
+<span id=cb15-4><a href=#cb15-4></a><span class=cf>raise</span> err</span></code></pre></div><h2 id=user-defined-exceptions>User-defined Exceptions</h2><div class=sourceCode id=cb16><pre class="sourceCode python"><code class="sourceCode python"><span id=cb16-1><a href=#cb16-1></a><span class=co># When creating a module that can raise several distinct errors,</span></span>
+<span id=cb16-2><a href=#cb16-2></a><span class=co># it is common practice to create a base class for its exceptions,</span></span>
+<span id=cb16-3><a href=#cb16-3></a><span class=co># and subclass that to create specific exception classes</span></span>
+<span id=cb16-4><a href=#cb16-4></a><span class=kw>class</span> Error(<span class=pp>Exception</span>):</span>
+<span id=cb16-5><a href=#cb16-5></a>    <span class=co>&quot;&quot;&quot;Base class for exceptions in this module.&quot;&quot;&quot;</span></span>
+<span id=cb16-6><a href=#cb16-6></a>    <span class=cf>pass</span></span>
+<span id=cb16-7><a href=#cb16-7></a></span>
+<span id=cb16-8><a href=#cb16-8></a><span class=kw>class</span> InputError(Error):</span>
+<span id=cb16-9><a href=#cb16-9></a>    <span class=co># expression -- input expression in which the error occurred</span></span>
+<span id=cb16-10><a href=#cb16-10></a>    <span class=kw>def</span> <span class=fu>__init__</span>(<span class=va>self</span>, expression, message):</span>
+<span id=cb16-11><a href=#cb16-11></a>        <span class=va>self</span>.expression <span class=op>=</span> expression</span>
+<span id=cb16-12><a href=#cb16-12></a>        <span class=va>self</span>.message <span class=op>=</span> message</span></code></pre></div><h2 id=general-references>General References</h2><p>https://dbader.org/blog/python-dictionaries-maps-and-hashtables</p></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>
