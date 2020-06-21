@@ -124,7 +124,7 @@
 <span id=cb9-12><a href=#cb9-12></a>ls.insert(index, elem) <span class=co># shifts other elements to the right</span></span>
 <span id=cb9-13><a href=#cb9-13></a>idx <span class=op>=</span> ls.index(elem) <span class=co># index of first matching instance (/throws ValueError)</span></span>
 <span id=cb9-14><a href=#cb9-14></a>ls.remove(elem) <span class=co># removes the element&#39;s first instance (/throws ValueError)</span></span>
-<span id=cb9-15><a href=#cb9-15></a>ls.sort() <span class=co># in-place</span></span>
+<span id=cb9-15><a href=#cb9-15></a>ls.sort(reverse<span class=op>=</span><span class=va>True</span><span class=op>|</span><span class=va>False</span>, key<span class=op>=</span>myFunc) <span class=co># in-place</span></span>
 <span id=cb9-16><a href=#cb9-16></a>ls.reverse() <span class=co># in-place</span></span>
 <span id=cb9-17><a href=#cb9-17></a>elem <span class=op>=</span> ls.pop(index<span class=op>=</span><span class=va>None</span>) <span class=co># removes from the given index (/returns the rightmost element)</span></span></code></pre></div><h2 id=dictionaries>Dictionaries</h2><p>This construct is used extensively in the Python internals eg. class attributes and variables in a stack frame.</p><div class=sourceCode id=cb10><pre class="sourceCode python"><code class="sourceCode python"><span id=cb10-1><a href=#cb10-1></a>d <span class=op>=</span> {} <span class=co># init an empty dict</span></span>
 <span id=cb10-2><a href=#cb10-2></a>d <span class=op>=</span> {<span class=st>&#39;a&#39;</span>: <span class=dv>1</span>, <span class=st>&#39;b&#39;</span>: <span class=dv>2</span>}</span>
