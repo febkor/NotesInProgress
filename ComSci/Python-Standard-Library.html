@@ -35,14 +35,29 @@
 <span id=cb4-13><a href=#cb4-13></a>zip_longest(<span class=st>&#39;ABCD&#39;</span>, <span class=st>&#39;xy&#39;</span>, fillvalue<span class=op>=</span><span class=st>&#39;-&#39;</span>) <span class=op>--&gt;</span> Ax By C<span class=op>-</span> D<span class=op>-</span></span></code></pre></div><p>Combinatoric iterators:</p><div class=sourceCode id=cb5><pre class="sourceCode python"><code class="sourceCode python"><span id=cb5-1><a href=#cb5-1></a>product(<span class=st>&#39;ABC&#39;</span>, repeat<span class=op>=</span><span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BA BB BC CA CB CC</span>
 <span id=cb5-2><a href=#cb5-2></a>permutations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BA BC CA CB</span>
 <span id=cb5-3><a href=#cb5-3></a>combinations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BC</span>
-<span id=cb5-4><a href=#cb5-4></a>combinations_with_replacement(<span class=st>&#39;ABC&#39;</span>,<span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BB BC CC</span></code></pre></div><h1 id=data>Data</h1><h2 id=json><code>json</code></h2><div class=sourceCode id=cb6><pre class="sourceCode python"><code class="sourceCode python"><span id=cb6-1><a href=#cb6-1></a>string <span class=op>=</span>  <span class=st>&#39;{ &quot;name&quot;:&quot;JK&quot;, &quot;age&quot;:30}&#39;</span></span>
-<span id=cb6-2><a href=#cb6-2></a>dictionary <span class=op>=</span> json.loads(string)</span>
-<span id=cb6-3><a href=#cb6-3></a>string <span class=op>=</span> json.dumps(obj, indent<span class=op>=</span><span class=dv>4</span>, sort_keys<span class=op>=</span><span class=va>True</span>) </span></code></pre></div><h1 id=misc>Misc</h1><h2 id=os><code>os</code></h2><div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><span id=cb7-1><a href=#cb7-1></a>os.getcwd()</span>
-<span id=cb7-2><a href=#cb7-2></a>os.listdir(path) <span class=op>--&gt;</span> files, directories</span>
-<span id=cb7-3><a href=#cb7-3></a>    <span class=co># path = &quot;..&quot; or &quot;/&quot; to go up a directory</span></span>
-<span id=cb7-4><a href=#cb7-4></a>    <span class=co># path = &quot;.&quot;, for current directory</span></span>
-<span id=cb7-5><a href=#cb7-5></a>os.walk(path) <span class=op>--&gt;</span> dirpath, dirnames, filenames<span class=op>;</span> recursive</span>
-<span id=cb7-6><a href=#cb7-6></a>os.path.isfile(path)</span>
-<span id=cb7-7><a href=#cb7-7></a>os.path.join(path1, path2, ...)</span>
-<span id=cb7-8><a href=#cb7-8></a>os.path.split(path)</span>
-<span id=cb7-9><a href=#cb7-9></a>os.path.absname(relpath)</span></code></pre></div></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>
+<span id=cb5-4><a href=#cb5-4></a>combinations_with_replacement(<span class=st>&#39;ABC&#39;</span>,<span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BB BC CC</span></code></pre></div><h1 id=text-processing>Text Processing</h1><h2 id=regex>Regex</h2><div class=sourceCode id=cb6><pre class="sourceCode py"><code class="sourceCode python"><span id=cb6-1><a href=#cb6-1></a><span class=im>import</span> re</span>
+<span id=cb6-2><a href=#cb6-2></a></span>
+<span id=cb6-3><a href=#cb6-3></a>regex <span class=op>=</span> re.<span class=bu>compile</span>(pattern, re.IGNORECASE)</span>
+<span id=cb6-4><a href=#cb6-4></a>match <span class=op>=</span> regex.match(text) <span class=co># scans only the beginning of the string</span></span>
+<span id=cb6-5><a href=#cb6-5></a>search <span class=op>=</span> regex.search(text) <span class=co># scans through the whole string</span></span>
+<span id=cb6-6><a href=#cb6-6></a></span>
+<span id=cb6-7><a href=#cb6-7></a>a <span class=op>=</span> <span class=st>&quot;123abc&quot;</span></span>
+<span id=cb6-8><a href=#cb6-8></a><span class=op>&gt;&gt;&gt;</span> re.match(<span class=st>&quot;[a-z]+&quot;</span>, a)</span>
+<span id=cb6-9><a href=#cb6-9></a><span class=va>None</span></span>
+<span id=cb6-10><a href=#cb6-10></a><span class=op>&gt;&gt;&gt;</span> re.search(<span class=st>&quot;[a-z]+&quot;</span>, a)</span>
+<span id=cb6-11><a href=#cb6-11></a>abc</span></code></pre></div><h1 id=data>Data</h1><h2 id=json><code>json</code></h2><div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><span id=cb7-1><a href=#cb7-1></a>string <span class=op>=</span>  <span class=st>&#39;{ &quot;name&quot;:&quot;JK&quot;, &quot;age&quot;:30}&#39;</span></span>
+<span id=cb7-2><a href=#cb7-2></a>dictionary <span class=op>=</span> json.loads(string)</span>
+<span id=cb7-3><a href=#cb7-3></a>string <span class=op>=</span> json.dumps(obj, indent<span class=op>=</span><span class=dv>4</span>, sort_keys<span class=op>=</span><span class=va>True</span>) </span></code></pre></div><h1 id=file-and-directory-access>File and Directory Access</h1><h2 id=os.path><code>os.path</code></h2><div class=sourceCode id=cb8><pre class="sourceCode python"><code class="sourceCode python"><span id=cb8-1><a href=#cb8-1></a>os.getcwd()</span>
+<span id=cb8-2><a href=#cb8-2></a>os.listdir(path) <span class=op>--&gt;</span> files, directories</span>
+<span id=cb8-3><a href=#cb8-3></a>    <span class=co># path = &quot;..&quot; or &quot;/&quot; to go up a directory</span></span>
+<span id=cb8-4><a href=#cb8-4></a>    <span class=co># path = &quot;.&quot;, for current directory</span></span>
+<span id=cb8-5><a href=#cb8-5></a>os.walk(path) <span class=op>--&gt;</span> dirpath, dirnames, filenames<span class=op>;</span> recursive</span>
+<span id=cb8-6><a href=#cb8-6></a>os.path.isfile(path)</span>
+<span id=cb8-7><a href=#cb8-7></a>os.path.join(path1, path2, ...)</span>
+<span id=cb8-8><a href=#cb8-8></a>os.path.split(path)</span>
+<span id=cb8-9><a href=#cb8-9></a>os.path.absname(relpath)</span></code></pre></div><h2 id=pathlib><code>pathlib</code></h2><div class=sourceCode id=cb9><pre class="sourceCode python"><code class="sourceCode python"><span id=cb9-1><a href=#cb9-1></a><span class=im>import</span> pathlib</span>
+<span id=cb9-2><a href=#cb9-2></a>path <span class=op>=</span> Path(<span class=bu>str</span><span class=op>=</span><span class=va>None</span>) <span class=co># None defaults to cwd</span></span>
+<span id=cb9-3><a href=#cb9-3></a>path.iterdir() <span class=co># if path is dir, yields path objects of contents</span></span>
+<span id=cb9-4><a href=#cb9-4></a>path.glob(pattern)</span>
+<span id=cb9-5><a href=#cb9-5></a>path.rglob(pattern) <span class=co># recursive glob, like path.glob(f&quot;**/{pattern}&quot;)</span></span>
+<span id=cb9-6><a href=#cb9-6></a>Path.joinpath(<span class=op>*</span>path_fragments)</span></code></pre></div></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>

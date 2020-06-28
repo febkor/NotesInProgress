@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang=en><head><meta http-equiv=content-type content="text/html; charset=UTF-8"><meta name=viewport content="width=device-width, initial-scale=1"><title>Shell | Notes in Progress</title><meta property=og:title content=Shell><meta property=og:site_name content=Notes in progress><meta property=og:type content=article><script type=application/ld+json>
+  {"@type":"BlogPosting","headline":"Notes in Progress","dateModified":"2019-02-09T00:00:00+00:00","datePublished":"2019-02-09T00:00:00+00:00","url":https://febkor.github.io/NotesInProgress,"mainEntityOfPage":{"@type":"WebPage","@id":https://febkor.github.io/NotesInProgress},"description":"Notes","@context":"http://schema.org"}</script><link rel=stylesheet href=https://febkor.github.io/NotesInProgress/static/main.css><link rel="shortcut icon" type=image/x-icon href=https://febkor.github.io/NotesInProgress/static/favicon.ico><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded", function () {
+    var mathElements = document.getElementsByClassName("math");
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") { katex.render(texText.data, mathElements[i], { displayMode: mathElements[i].classList.contains("display"), throwOnError: false } );
+    }}});</script></head><body><header class=site-header role=banner><div class=wrapper><a class=site-title rel=author href=https://febkor.github.io/NotesInProgress>Notes in Progress</a><nav class=site-nav><input type=checkbox id=nav-trigger class=nav-trigger><label for=nav-trigger></label></nav></div></header><main class=page-content aria-label=Content><div class=wrapper><article class="post h-entry" itemscope itemtype=http://schema.org/BlogPosting><header class=post-header><h1 class="post-title p-name" itemprop="name headline">Shell</h1></header><div class="post-content e-content" itemprop=articleBody><h1 id=basics>Basics</h1><pre><code>Cmdlet          | Alias     | Bash 
+--------------- |---------  |-------- 
+Get-ChildItem   | gci       | ls 
+Set-Location    | sl        | cd 
+Push-Location   | pushd     | pushd 
+Pop-Location    | popd      | popd 
+New-Item        | ni        | (touch)
+mkdir           |           | mkdir 
+Explorer        | start     | (open)
+Remove-Item     | rm        | rm 
+Move-Item       | mv        | mv 
+Copy-Item       | cp        | cp 
+Write-Output    | write     | echo 
+Get-Content     | gc        | cat 
+Select-String   | sls       | (grep)
+Measure-Object  | measure   | (wc)
+&gt;               |           | &gt; 
+|               |           | | 
+Get-Help        |           | man 
+exit            |           | exit </code></pre><h1 id=powershell>PowerShell</h1><h2 id=arrays>Arrays</h2><pre class=pwsh><code>$array = @(
+   1,
+   2,
+   3
+ )</code></pre><h2 id=calling-programs>Calling programs</h2><pre><code>$prog = &quot;path/to.exe&quot;
+$flag = &quot;something&quot;
+&amp; $prog flag=$flag</code></pre><h2 id=misc>Misc</h2><p>-<code>whatif</code> to test things out</p><h1 id=cmd>CMD</h1><p><code>pwd | clip</code> pipes output to the clipboard</p><h2 id=running-batch-files>Running batch files</h2><p>To run a batch file (<code>eg.bat</code>) from a batch file:</p><ul><li><code>CALL eg.bat</code>: will start it in the same window and the called batch has access to the same variable context. It can also change variables which affects the caller.</li><li><code>START eg.bat</code>: will create a new cmd.exe for the called batch, and without /b it will open a new window. As it&#x2019;s a new context, variables can&#x2019;t be shared.</li></ul></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>
