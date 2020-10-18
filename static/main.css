@@ -104,14 +104,6 @@ a:hover {
     text-decoration: underline
 }
 
-.social-media-list a:hover {
-    text-decoration: none
-}
-
-.social-media-list a:hover .username {
-    text-decoration: underline
-}
-
 blockquote {
     color: #828282;
     border-left: 4px solid #e8e8e8;
@@ -182,10 +174,6 @@ pre>code {
     vertical-align: text-top
 }
 
-.social-media-list li+li {
-    padding-top: 5px
-}
-
 table {
     margin-bottom: 30px;
     width: 100%;
@@ -215,7 +203,6 @@ table td {
 }
 
 .site-header {
-    border-top: 5px solid #424242;
     border-bottom: 1px solid #e8e8e8;
     min-height: 55.95px;
     position: relative
@@ -313,12 +300,6 @@ table td {
 .footer-heading {
     font-size: 18px;
     margin-bottom: 15px
-}
-
-.contact-list,
-.social-media-list {
-    list-style: none;
-    margin-left: 0
 }
 
 .footer-col-wrapper {
