@@ -25,174 +25,112 @@
 <span id=cb3-8><a href=#cb3-8 aria-hidden=true tabindex=-1></a>datetime.day</span>
 <span id=cb3-9><a href=#cb3-9 aria-hidden=true tabindex=-1></a>datetime.hour</span>
 <span id=cb3-10><a href=#cb3-10 aria-hidden=true tabindex=-1></a>datetime.minute</span>
-<span id=cb3-11><a href=#cb3-11 aria-hidden=true tabindex=-1></a>datetime.second</span></code></pre></div><p>Classes in the <code>datetime</code> module</p><ul><li><code>datetime</code>: attributes incl year, month, day, hour, minute, second, and tzinfo.</li><li><code>date</code></li><li><code>time</code></li><li><code>timedelta</code></li></ul><p>The date, datetime, time, and timezone types share these common features:</p><ul><li>immutable</li><li>hashable</li><li>support efficient pickling</li></ul><p>`` dt.datetime.strptime(&#x2018;Jun 1 2005 1:33PM&#x2019;, &#x2018;%b %d %Y %I:%M%p&#x2019;)</p><pre><code>
-# Numeric and Mathematical Modules
-
-The `numbers` module defines ABCs such as:
-
-- Number
-- Integral (int, bool)
-- Rational
-- Real (float)
-- Complex
-
-## math
-
-- `comb(n,k), perm(n,k): combinations, permutations`
-- `gcd(n), lcm(n)`
-- `ceil(x), floor(x), fabs(x)`
-- `isclose(x, y, *, rel_tol=1e-09, abs_tol=0.0)`
-- `isqrt(n)`
-- `prod(iterable, start=1)`
-- `log(x), log2(x), log10(x)`
-- `exp(x), pow(x), sqrt(x)`
-- `sin(x), cos(x), tan(x)`
-- `atan2(y, x)`
-- `erf(x)`
-- `degrees(rad), radians(deg)`
-- `dist(p, q), hypot(coords)`
-- `pi, e, tau, inf, nan`
-
-
-## cmath
-
-Complex math.
-
-## decimal
-
-Exact precision decimals.
-
-## fractions
-
-## random
-
-## statistics
-
-`fmean() geometric_mean() harmonic_mean()`
-median() mode()
-stdev() variance()
-NormalDist(mu=0.0, sigma=1.0)
-    from_samples(data)
-    samples(m, seed=None)
-    pdf(x)
-    cdf(x)
-    inv_cdf(x)
-    zscore(x)
-
-
-# Functional Programming Modules
-
-## `functools`
-
-For higher-order functions: functions that act on or return other functions.
-
-```python
-@functools.cached_property(func)
-functools.cmp_to_key(func)
-@functools.lru_cache(user_function)
-@functools.lru_cache(maxsize=128, typed=False)
-@functools.total_ordering
-functools.partial(func, /, *args, **keywords)
-class functools.partialmethod(func, /, *args, **keywords)
-functools.reduce(function, iterable[, initializer])
-@functools.singledispatch
-class functools.singledispatchmethod(func)
-@functools.wraps(wrapped, assigned=WRAPPER_ASSIGNMENTS, updated=WRAPPER_UPDATES)</code></pre><h2 id=itertools><code>itertools</code></h2><p>Infinite iterators:</p><div class=sourceCode id=cb5><pre class="sourceCode python"><code class="sourceCode python"><span id=cb5-1><a href=#cb5-1 aria-hidden=true tabindex=-1></a>count(<span class=dv>10</span>) <span class=op>--&gt;</span> <span class=dv>10</span> <span class=dv>11</span> <span class=dv>12</span> <span class=dv>13</span> <span class=dv>14</span> ...</span>
-<span id=cb5-2><a href=#cb5-2 aria-hidden=true tabindex=-1></a>cycle(<span class=st>&#39;ABCD&#39;</span>) <span class=op>--&gt;</span> A B C D A B C D ...</span>
-<span id=cb5-3><a href=#cb5-3 aria-hidden=true tabindex=-1></a>repeat(<span class=dv>10</span>, <span class=dv>3</span>) <span class=op>--&gt;</span> <span class=dv>10</span> <span class=dv>10</span> <span class=dv>10</span> ...</span></code></pre></div><p>Iterators terminating on the shortest input sequence:</p><div class=sourceCode id=cb6><pre class="sourceCode python"><code class="sourceCode python"><span id=cb6-1><a href=#cb6-1 aria-hidden=true tabindex=-1></a>accumulate([<span class=dv>1</span>,<span class=dv>2</span>,<span class=dv>3</span>,<span class=dv>4</span>,<span class=dv>5</span>], initial<span class=op>=</span><span class=dv>10</span>) <span class=op>--&gt;</span> <span class=dv>11</span> <span class=dv>13</span> <span class=dv>16</span> <span class=dv>20</span> <span class=dv>25</span></span>
-<span id=cb6-2><a href=#cb6-2 aria-hidden=true tabindex=-1></a>chain(<span class=st>&#39;ABC&#39;</span>, <span class=st>&#39;DEF&#39;</span>) <span class=op>--&gt;</span> A B C D E F</span>
-<span id=cb6-3><a href=#cb6-3 aria-hidden=true tabindex=-1></a>chain.from_iterable()</span>
-<span id=cb6-4><a href=#cb6-4 aria-hidden=true tabindex=-1></a>chain.from_iterable([<span class=st>&#39;ABC&#39;</span>, <span class=st>&#39;DEF&#39;</span>]) <span class=op>--&gt;</span> A B C D E F</span>
-<span id=cb6-5><a href=#cb6-5 aria-hidden=true tabindex=-1></a>compress(<span class=st>&#39;ABCDEF&#39;</span>, [<span class=dv>1</span>,<span class=dv>0</span>,<span class=dv>1</span>,<span class=dv>0</span>,<span class=dv>1</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> A C E F</span>
-<span id=cb6-6><a href=#cb6-6 aria-hidden=true tabindex=-1></a>dropwhile(<span class=kw>lambda</span> x: x<span class=op>&lt;</span><span class=dv>5</span>, [<span class=dv>1</span>,<span class=dv>4</span>,<span class=dv>6</span>,<span class=dv>4</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> <span class=dv>6</span> <span class=dv>4</span> <span class=dv>1</span></span>
-<span id=cb6-7><a href=#cb6-7 aria-hidden=true tabindex=-1></a>filterfalse(<span class=kw>lambda</span> x: x<span class=op>%</span><span class=dv>2</span>, <span class=bu>range</span>(<span class=dv>10</span>)) <span class=op>--&gt;</span> <span class=dv>0</span> <span class=dv>2</span> <span class=dv>4</span> <span class=dv>6</span> <span class=dv>8</span></span>
-<span id=cb6-8><a href=#cb6-8 aria-hidden=true tabindex=-1></a>groupby()</span>
-<span id=cb6-9><a href=#cb6-9 aria-hidden=true tabindex=-1></a>islice(<span class=st>&#39;ABCDEFG&#39;</span>, start<span class=op>=</span><span class=dv>2</span>, stop<span class=op>=</span><span class=va>None</span>, step<span class=op>=</span><span class=dv>1</span>) <span class=op>--&gt;</span> C D E F G</span>
-<span id=cb6-10><a href=#cb6-10 aria-hidden=true tabindex=-1></a>starmap(<span class=bu>pow</span>, [(<span class=dv>2</span>,<span class=dv>5</span>), (<span class=dv>3</span>,<span class=dv>2</span>), (<span class=dv>10</span>,<span class=dv>3</span>)]) <span class=op>--&gt;</span> <span class=dv>32</span> <span class=dv>9</span> <span class=dv>1000</span></span>
-<span id=cb6-11><a href=#cb6-11 aria-hidden=true tabindex=-1></a>takewhile(<span class=kw>lambda</span> x: x<span class=op>&lt;</span><span class=dv>5</span>, [<span class=dv>1</span>,<span class=dv>4</span>,<span class=dv>6</span>,<span class=dv>4</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> <span class=dv>1</span> <span class=dv>4</span></span>
-<span id=cb6-12><a href=#cb6-12 aria-hidden=true tabindex=-1></a>tee()</span>
-<span id=cb6-13><a href=#cb6-13 aria-hidden=true tabindex=-1></a>zip_longest(<span class=st>&#39;ABCD&#39;</span>, <span class=st>&#39;xy&#39;</span>, fillvalue<span class=op>=</span><span class=st>&#39;-&#39;</span>) <span class=op>--&gt;</span> Ax By C<span class=op>-</span> D<span class=op>-</span></span></code></pre></div><p>Combinatoric iterators:</p><div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><span id=cb7-1><a href=#cb7-1 aria-hidden=true tabindex=-1></a>product(<span class=st>&#39;ABC&#39;</span>, repeat<span class=op>=</span><span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BA BB BC CA CB CC</span>
-<span id=cb7-2><a href=#cb7-2 aria-hidden=true tabindex=-1></a>permutations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BA BC CA CB</span>
-<span id=cb7-3><a href=#cb7-3 aria-hidden=true tabindex=-1></a>combinations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BC</span>
-<span id=cb7-4><a href=#cb7-4 aria-hidden=true tabindex=-1></a>combinations_with_replacement(<span class=st>&#39;ABC&#39;</span>,<span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BB BC CC</span></code></pre></div><h1 id=text-processing>Text Processing</h1><h2 id=string>String</h2><h3 id=built-in-constants>Built-in Constants</h3><div class=sourceCode id=cb8><pre class="sourceCode python"><code class="sourceCode python"><span id=cb8-1><a href=#cb8-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> string</span>
-<span id=cb8-2><a href=#cb8-2 aria-hidden=true tabindex=-1></a>string.ascii_letters</span>
-<span id=cb8-3><a href=#cb8-3 aria-hidden=true tabindex=-1></a>string.ascii_lowercase</span>
-<span id=cb8-4><a href=#cb8-4 aria-hidden=true tabindex=-1></a>string.ascii_uppercase</span>
-<span id=cb8-5><a href=#cb8-5 aria-hidden=true tabindex=-1></a>string.digits</span>
-<span id=cb8-6><a href=#cb8-6 aria-hidden=true tabindex=-1></a>string.hexdigits</span>
-<span id=cb8-7><a href=#cb8-7 aria-hidden=true tabindex=-1></a>string.octdigits</span>
-<span id=cb8-8><a href=#cb8-8 aria-hidden=true tabindex=-1></a>string.punctuation</span>
-<span id=cb8-9><a href=#cb8-9 aria-hidden=true tabindex=-1></a>string.printable</span>
-<span id=cb8-10><a href=#cb8-10 aria-hidden=true tabindex=-1></a>string.whitespace</span></code></pre></div><h2 id=regex>Regex</h2><div class=sourceCode id=cb9><pre class="sourceCode py"><code class="sourceCode python"><span id=cb9-1><a href=#cb9-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> re</span>
-<span id=cb9-2><a href=#cb9-2 aria-hidden=true tabindex=-1></a></span>
-<span id=cb9-3><a href=#cb9-3 aria-hidden=true tabindex=-1></a>regex <span class=op>=</span> re.<span class=bu>compile</span>(pattern, re.IGNORECASE)</span>
-<span id=cb9-4><a href=#cb9-4 aria-hidden=true tabindex=-1></a>match <span class=op>=</span> regex.match(text) <span class=co># scans only the beginning of the string</span></span>
-<span id=cb9-5><a href=#cb9-5 aria-hidden=true tabindex=-1></a>search <span class=op>=</span> regex.search(text) <span class=co># scans through the whole string</span></span>
-<span id=cb9-6><a href=#cb9-6 aria-hidden=true tabindex=-1></a></span>
-<span id=cb9-7><a href=#cb9-7 aria-hidden=true tabindex=-1></a>a <span class=op>=</span> <span class=st>&quot;123abc&quot;</span></span>
-<span id=cb9-8><a href=#cb9-8 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> re.match(<span class=st>&quot;[a-z]+&quot;</span>, a) <span class=co># None</span></span>
-<span id=cb9-9><a href=#cb9-9 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> re.search(<span class=st>&quot;[a-z]+&quot;</span>, a) <span class=co># &quot;abc&quot;</span></span>
-<span id=cb9-10><a href=#cb9-10 aria-hidden=true tabindex=-1></a><span class=cf>if</span> m:</span>
-<span id=cb9-11><a href=#cb9-11 aria-hidden=true tabindex=-1></a>    <span class=bu>print</span>(<span class=st>&quot;matched!&quot;</span>)</span>
-<span id=cb9-12><a href=#cb9-12 aria-hidden=true tabindex=-1></a></span>
-<span id=cb9-13><a href=#cb9-13 aria-hidden=true tabindex=-1></a><span class=co># m is a match object</span></span>
-<span id=cb9-14><a href=#cb9-14 aria-hidden=true tabindex=-1></a>m.group(<span class=dv>0</span>) <span class=co># &quot;abc&quot;</span></span>
-<span id=cb9-15><a href=#cb9-15 aria-hidden=true tabindex=-1></a>m.group(<span class=st>&quot;name&quot;</span>)</span></code></pre></div><h1 id=files-and-data>Files and Data</h1><h2 id=csv><code>csv</code></h2><div class=sourceCode id=cb10><pre class="sourceCode python"><code class="sourceCode python"><span id=cb10-1><a href=#cb10-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> csv</span>
+<span id=cb3-11><a href=#cb3-11 aria-hidden=true tabindex=-1></a>datetime.second</span></code></pre></div><p>Classes in the <code>datetime</code> module</p><ul><li><code>datetime</code>: attributes incl year, month, day, hour, minute, second, and tzinfo.</li><li><code>date</code></li><li><code>time</code></li><li><code>timedelta</code></li></ul><p>The date, datetime, time, and timezone types share these common features:</p><ul><li>immutable</li><li>hashable</li><li>support efficient pickling</li></ul><div class=sourceCode id=cb4><pre class="sourceCode python"><code class="sourceCode python"><span id=cb4-1><a href=#cb4-1 aria-hidden=true tabindex=-1></a>dt.datetime.strptime(<span class=st>&#39;Jun 1 2005  1:33PM&#39;</span>, <span class=st>&#39;%b </span><span class=sc>%d</span><span class=st> %Y %I:%M%p&#39;</span>)</span></code></pre></div><h1 id=numeric-and-mathematical-modules>Numeric and Mathematical Modules</h1><p>The <code>numbers</code> module defines ABCs such as:</p><ul><li>Number</li><li>Integral (int, bool)</li><li>Rational</li><li>Real (float)</li><li>Complex</li></ul><h2 id=math>math</h2><ul><li><code>comb(n,k), perm(n,k): combinations, permutations</code></li><li><code>gcd(n), lcm(n)</code></li><li><code>ceil(x), floor(x), fabs(x)</code></li><li><code>isclose(x, y, *, rel_tol=1e-09, abs_tol=0.0)</code></li><li><code>isqrt(n)</code></li><li><code>prod(iterable, start=1)</code></li><li><code>log(x), log2(x), log10(x)</code></li><li><code>exp(x), pow(x), sqrt(x)</code></li><li><code>sin(x), cos(x), tan(x)</code></li><li><code>atan2(y, x)</code></li><li><code>erf(x)</code></li><li><code>degrees(rad), radians(deg)</code></li><li><code>dist(p, q), hypot(coords)</code></li><li><code>pi, e, tau, inf, nan</code></li></ul><h2 id=cmath>cmath</h2><p>Complex math.</p><h2 id=decimal>decimal</h2><p>Exact precision decimals.</p><h2 id=fractions>fractions</h2><h2 id=random>random</h2><h2 id=statistics>statistics</h2><p><code>fmean() geometric_mean() harmonic_mean()</code> median() mode() stdev() variance() NormalDist(mu=0.0, sigma=1.0) from_samples(data) samples(m, seed=None) pdf(x) cdf(x) inv_cdf(x) zscore(x)</p><h1 id=functional-programming-modules>Functional Programming Modules</h1><h2 id=functools><code>functools</code></h2><p>For higher-order functions: functions that act on or return other functions.</p><div class=sourceCode id=cb5><pre class="sourceCode python"><code class="sourceCode python"><span id=cb5-1><a href=#cb5-1 aria-hidden=true tabindex=-1></a><span class=at>@functools.cached_property</span>(func)</span>
+<span id=cb5-2><a href=#cb5-2 aria-hidden=true tabindex=-1></a>functools.cmp_to_key(func)</span>
+<span id=cb5-3><a href=#cb5-3 aria-hidden=true tabindex=-1></a><span class=at>@functools.lru_cache</span>(user_function)</span>
+<span id=cb5-4><a href=#cb5-4 aria-hidden=true tabindex=-1></a><span class=at>@functools.lru_cache</span>(maxsize<span class=op>=</span><span class=dv>128</span>, typed<span class=op>=</span><span class=va>False</span>)</span>
+<span id=cb5-5><a href=#cb5-5 aria-hidden=true tabindex=-1></a><span class=at>@functools.total_ordering</span></span>
+<span id=cb5-6><a href=#cb5-6 aria-hidden=true tabindex=-1></a>functools.partial(func, <span class=op>/</span>, <span class=op>*</span>args, <span class=op>**</span>keywords)</span>
+<span id=cb5-7><a href=#cb5-7 aria-hidden=true tabindex=-1></a><span class=kw>class</span> functools.partialmethod(func, <span class=op>/</span>, <span class=op>*</span>args, <span class=op>**</span>keywords)</span>
+<span id=cb5-8><a href=#cb5-8 aria-hidden=true tabindex=-1></a>functools.<span class=bu>reduce</span>(function, iterable[, initializer])</span>
+<span id=cb5-9><a href=#cb5-9 aria-hidden=true tabindex=-1></a><span class=at>@functools.singledispatch</span></span>
+<span id=cb5-10><a href=#cb5-10 aria-hidden=true tabindex=-1></a><span class=kw>class</span> functools.singledispatchmethod(func)</span>
+<span id=cb5-11><a href=#cb5-11 aria-hidden=true tabindex=-1></a><span class=at>@functools.wraps</span>(wrapped, assigned<span class=op>=</span>WRAPPER_ASSIGNMENTS, updated<span class=op>=</span>WRAPPER_UPDATES)</span></code></pre></div><h2 id=itertools><code>itertools</code></h2><p>Infinite iterators:</p><div class=sourceCode id=cb6><pre class="sourceCode python"><code class="sourceCode python"><span id=cb6-1><a href=#cb6-1 aria-hidden=true tabindex=-1></a>count(<span class=dv>10</span>) <span class=op>--&gt;</span> <span class=dv>10</span> <span class=dv>11</span> <span class=dv>12</span> <span class=dv>13</span> <span class=dv>14</span> ...</span>
+<span id=cb6-2><a href=#cb6-2 aria-hidden=true tabindex=-1></a>cycle(<span class=st>&#39;ABCD&#39;</span>) <span class=op>--&gt;</span> A B C D A B C D ...</span>
+<span id=cb6-3><a href=#cb6-3 aria-hidden=true tabindex=-1></a>repeat(<span class=dv>10</span>, <span class=dv>3</span>) <span class=op>--&gt;</span> <span class=dv>10</span> <span class=dv>10</span> <span class=dv>10</span> ...</span></code></pre></div><p>Iterators terminating on the shortest input sequence:</p><div class=sourceCode id=cb7><pre class="sourceCode python"><code class="sourceCode python"><span id=cb7-1><a href=#cb7-1 aria-hidden=true tabindex=-1></a>accumulate([<span class=dv>1</span>,<span class=dv>2</span>,<span class=dv>3</span>,<span class=dv>4</span>,<span class=dv>5</span>], initial<span class=op>=</span><span class=dv>10</span>) <span class=op>--&gt;</span> <span class=dv>11</span> <span class=dv>13</span> <span class=dv>16</span> <span class=dv>20</span> <span class=dv>25</span></span>
+<span id=cb7-2><a href=#cb7-2 aria-hidden=true tabindex=-1></a>chain(<span class=st>&#39;ABC&#39;</span>, <span class=st>&#39;DEF&#39;</span>) <span class=op>--&gt;</span> A B C D E F</span>
+<span id=cb7-3><a href=#cb7-3 aria-hidden=true tabindex=-1></a>chain.from_iterable()</span>
+<span id=cb7-4><a href=#cb7-4 aria-hidden=true tabindex=-1></a>chain.from_iterable([<span class=st>&#39;ABC&#39;</span>, <span class=st>&#39;DEF&#39;</span>]) <span class=op>--&gt;</span> A B C D E F</span>
+<span id=cb7-5><a href=#cb7-5 aria-hidden=true tabindex=-1></a>compress(<span class=st>&#39;ABCDEF&#39;</span>, [<span class=dv>1</span>,<span class=dv>0</span>,<span class=dv>1</span>,<span class=dv>0</span>,<span class=dv>1</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> A C E F</span>
+<span id=cb7-6><a href=#cb7-6 aria-hidden=true tabindex=-1></a>dropwhile(<span class=kw>lambda</span> x: x<span class=op>&lt;</span><span class=dv>5</span>, [<span class=dv>1</span>,<span class=dv>4</span>,<span class=dv>6</span>,<span class=dv>4</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> <span class=dv>6</span> <span class=dv>4</span> <span class=dv>1</span></span>
+<span id=cb7-7><a href=#cb7-7 aria-hidden=true tabindex=-1></a>filterfalse(<span class=kw>lambda</span> x: x<span class=op>%</span><span class=dv>2</span>, <span class=bu>range</span>(<span class=dv>10</span>)) <span class=op>--&gt;</span> <span class=dv>0</span> <span class=dv>2</span> <span class=dv>4</span> <span class=dv>6</span> <span class=dv>8</span></span>
+<span id=cb7-8><a href=#cb7-8 aria-hidden=true tabindex=-1></a>groupby()</span>
+<span id=cb7-9><a href=#cb7-9 aria-hidden=true tabindex=-1></a>islice(<span class=st>&#39;ABCDEFG&#39;</span>, start<span class=op>=</span><span class=dv>2</span>, stop<span class=op>=</span><span class=va>None</span>, step<span class=op>=</span><span class=dv>1</span>) <span class=op>--&gt;</span> C D E F G</span>
+<span id=cb7-10><a href=#cb7-10 aria-hidden=true tabindex=-1></a>starmap(<span class=bu>pow</span>, [(<span class=dv>2</span>,<span class=dv>5</span>), (<span class=dv>3</span>,<span class=dv>2</span>), (<span class=dv>10</span>,<span class=dv>3</span>)]) <span class=op>--&gt;</span> <span class=dv>32</span> <span class=dv>9</span> <span class=dv>1000</span></span>
+<span id=cb7-11><a href=#cb7-11 aria-hidden=true tabindex=-1></a>takewhile(<span class=kw>lambda</span> x: x<span class=op>&lt;</span><span class=dv>5</span>, [<span class=dv>1</span>,<span class=dv>4</span>,<span class=dv>6</span>,<span class=dv>4</span>,<span class=dv>1</span>]) <span class=op>--&gt;</span> <span class=dv>1</span> <span class=dv>4</span></span>
+<span id=cb7-12><a href=#cb7-12 aria-hidden=true tabindex=-1></a>tee()</span>
+<span id=cb7-13><a href=#cb7-13 aria-hidden=true tabindex=-1></a>zip_longest(<span class=st>&#39;ABCD&#39;</span>, <span class=st>&#39;xy&#39;</span>, fillvalue<span class=op>=</span><span class=st>&#39;-&#39;</span>) <span class=op>--&gt;</span> Ax By C<span class=op>-</span> D<span class=op>-</span></span></code></pre></div><p>Combinatoric iterators:</p><div class=sourceCode id=cb8><pre class="sourceCode python"><code class="sourceCode python"><span id=cb8-1><a href=#cb8-1 aria-hidden=true tabindex=-1></a>product(<span class=st>&#39;ABC&#39;</span>, repeat<span class=op>=</span><span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BA BB BC CA CB CC</span>
+<span id=cb8-2><a href=#cb8-2 aria-hidden=true tabindex=-1></a>permutations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BA BC CA CB</span>
+<span id=cb8-3><a href=#cb8-3 aria-hidden=true tabindex=-1></a>combinations(<span class=st>&#39;ABC&#39;</span>, <span class=dv>2</span>) <span class=op>--&gt;</span> AB AC BC</span>
+<span id=cb8-4><a href=#cb8-4 aria-hidden=true tabindex=-1></a>combinations_with_replacement(<span class=st>&#39;ABC&#39;</span>,<span class=dv>2</span>) <span class=op>--&gt;</span> AA AB AC BB BC CC</span></code></pre></div><h1 id=text-processing>Text Processing</h1><h2 id=string>String</h2><h3 id=built-in-constants>Built-in Constants</h3><div class=sourceCode id=cb9><pre class="sourceCode python"><code class="sourceCode python"><span id=cb9-1><a href=#cb9-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> string</span>
+<span id=cb9-2><a href=#cb9-2 aria-hidden=true tabindex=-1></a>string.ascii_letters</span>
+<span id=cb9-3><a href=#cb9-3 aria-hidden=true tabindex=-1></a>string.ascii_lowercase</span>
+<span id=cb9-4><a href=#cb9-4 aria-hidden=true tabindex=-1></a>string.ascii_uppercase</span>
+<span id=cb9-5><a href=#cb9-5 aria-hidden=true tabindex=-1></a>string.digits</span>
+<span id=cb9-6><a href=#cb9-6 aria-hidden=true tabindex=-1></a>string.hexdigits</span>
+<span id=cb9-7><a href=#cb9-7 aria-hidden=true tabindex=-1></a>string.octdigits</span>
+<span id=cb9-8><a href=#cb9-8 aria-hidden=true tabindex=-1></a>string.punctuation</span>
+<span id=cb9-9><a href=#cb9-9 aria-hidden=true tabindex=-1></a>string.printable</span>
+<span id=cb9-10><a href=#cb9-10 aria-hidden=true tabindex=-1></a>string.whitespace</span></code></pre></div><h2 id=regex>Regex</h2><div class=sourceCode id=cb10><pre class="sourceCode py"><code class="sourceCode python"><span id=cb10-1><a href=#cb10-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> re</span>
 <span id=cb10-2><a href=#cb10-2 aria-hidden=true tabindex=-1></a></span>
-<span id=cb10-3><a href=#cb10-3 aria-hidden=true tabindex=-1></a><span class=co># need to specify newline=&#39;&#39;, else</span></span>
-<span id=cb10-4><a href=#cb10-4 aria-hidden=true tabindex=-1></a><span class=co># - newlines embedded inside quoted fields will not be interpreted correctly</span></span>
-<span id=cb10-5><a href=#cb10-5 aria-hidden=true tabindex=-1></a><span class=co># - for &quot;\r\n&quot; line-endings, on write, an extra \r will be added</span></span>
-<span id=cb10-6><a href=#cb10-6 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> f:</span>
-<span id=cb10-7><a href=#cb10-7 aria-hidden=true tabindex=-1></a>    reader <span class=op>=</span> csv.reader(f, delimiter<span class=op>=</span><span class=st>&#39;,&#39;</span>, quotechar<span class=op>=</span><span class=st>&#39;&quot;&#39;</span>)</span>
-<span id=cb10-8><a href=#cb10-8 aria-hidden=true tabindex=-1></a>    <span class=cf>for</span> row <span class=kw>in</span> reader:</span>
-<span id=cb10-9><a href=#cb10-9 aria-hidden=true tabindex=-1></a>        <span class=bu>print</span>(<span class=st>&#39;, &#39;</span>.join(row))</span>
-<span id=cb10-10><a href=#cb10-10 aria-hidden=true tabindex=-1></a></span>
-<span id=cb10-11><a href=#cb10-11 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, <span class=st>&#39;w&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> f:</span>
-<span id=cb10-12><a href=#cb10-12 aria-hidden=true tabindex=-1></a>    writer <span class=op>=</span> csv.writer(f, delimiter<span class=op>=</span><span class=st>&#39;,&#39;</span>, quotechar<span class=op>=</span><span class=st>&#39;&quot;&#39;</span>, quoting<span class=op>=</span>csv.QUOTE_MINIMAL)</span>
-<span id=cb10-13><a href=#cb10-13 aria-hidden=true tabindex=-1></a>    writer.writerow(some)</span>
-<span id=cb10-14><a href=#cb10-14 aria-hidden=true tabindex=-1></a>    writer.writerows(someiterable)</span>
-<span id=cb10-15><a href=#cb10-15 aria-hidden=true tabindex=-1></a></span>
-<span id=cb10-16><a href=#cb10-16 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, <span class=st>&#39;w&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> csvfile:</span>
-<span id=cb10-17><a href=#cb10-17 aria-hidden=true tabindex=-1></a>    fieldnames <span class=op>=</span> [<span class=st>&#39;a&#39;</span>, <span class=st>&#39;b&#39;</span>]</span>
-<span id=cb10-18><a href=#cb10-18 aria-hidden=true tabindex=-1></a>    writer <span class=op>=</span> csv.DictWriter(csvfile, fieldnames<span class=op>=</span>fieldnames)</span>
-<span id=cb10-19><a href=#cb10-19 aria-hidden=true tabindex=-1></a></span>
-<span id=cb10-20><a href=#cb10-20 aria-hidden=true tabindex=-1></a>    writer.writeheader()</span>
-<span id=cb10-21><a href=#cb10-21 aria-hidden=true tabindex=-1></a>    writer.writerow({<span class=st>&#39;a&#39;</span>: <span class=dv>1</span>, <span class=st>&#39;b&#39;</span>: <span class=dv>2</span>})</span>
-<span id=cb10-22><a href=#cb10-22 aria-hidden=true tabindex=-1></a></span>
-<span id=cb10-23><a href=#cb10-23 aria-hidden=true tabindex=-1></a><span class=co># csv.DictReader(f, fieldnames=None, restkey=None, restval=None, dialect=&#39;excel&#39;, *args, **kwds)</span></span></code></pre></div><h2 id=json><code>json</code></h2><div class=sourceCode id=cb11><pre class="sourceCode python"><code class="sourceCode python"><span id=cb11-1><a href=#cb11-1 aria-hidden=true tabindex=-1></a>string <span class=op>=</span>  <span class=st>&#39;{ &quot;name&quot;:&quot;JK&quot;, &quot;age&quot;:30}&#39;</span></span>
-<span id=cb11-2><a href=#cb11-2 aria-hidden=true tabindex=-1></a>dictionary <span class=op>=</span> json.loads(string)</span>
-<span id=cb11-3><a href=#cb11-3 aria-hidden=true tabindex=-1></a>string <span class=op>=</span> json.dumps(obj, indent<span class=op>=</span><span class=dv>4</span>, sort_keys<span class=op>=</span><span class=va>True</span>)</span>
-<span id=cb11-4><a href=#cb11-4 aria-hidden=true tabindex=-1></a></span>
-<span id=cb11-5><a href=#cb11-5 aria-hidden=true tabindex=-1></a>contents <span class=op>=</span> json.load(file_obj)</span>
-<span id=cb11-6><a href=#cb11-6 aria-hidden=true tabindex=-1></a>json.dump(obj, file_obj)</span></code></pre></div><h2 id=data-compression-and-archiving>Data Compression and Archiving</h2><div class=sourceCode id=cb12><pre class="sourceCode python"><code class="sourceCode python"><span id=cb12-1><a href=#cb12-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> gzip</span>
-<span id=cb12-2><a href=#cb12-2 aria-hidden=true tabindex=-1></a></span>
-<span id=cb12-3><a href=#cb12-3 aria-hidden=true tabindex=-1></a>c <span class=op>=</span> gzip.compress(msg)</span>
-<span id=cb12-4><a href=#cb12-4 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> gzip.decompress(c)</span></code></pre></div><h1 id=file-and-directory-access>File and Directory Access</h1><h2 id=os.path><code>os.path</code></h2><div class=sourceCode id=cb13><pre class="sourceCode python"><code class="sourceCode python"><span id=cb13-1><a href=#cb13-1 aria-hidden=true tabindex=-1></a>os.getcwd()</span>
-<span id=cb13-2><a href=#cb13-2 aria-hidden=true tabindex=-1></a>os.listdir(path) <span class=op>--&gt;</span> files, directories</span>
-<span id=cb13-3><a href=#cb13-3 aria-hidden=true tabindex=-1></a>    <span class=co># path = &quot;..&quot; or &quot;/&quot; to go up a directory</span></span>
-<span id=cb13-4><a href=#cb13-4 aria-hidden=true tabindex=-1></a>    <span class=co># path = &quot;.&quot;, for current directory</span></span>
-<span id=cb13-5><a href=#cb13-5 aria-hidden=true tabindex=-1></a>os.walk(path) <span class=op>--&gt;</span> dirpath, dirnames, filenames<span class=op>;</span> recursive</span>
-<span id=cb13-6><a href=#cb13-6 aria-hidden=true tabindex=-1></a>os.path.isfile(path)</span>
-<span id=cb13-7><a href=#cb13-7 aria-hidden=true tabindex=-1></a>os.path.join(path1, path2, ...)</span>
-<span id=cb13-8><a href=#cb13-8 aria-hidden=true tabindex=-1></a>os.path.split(path)</span>
-<span id=cb13-9><a href=#cb13-9 aria-hidden=true tabindex=-1></a>os.path.absname(relpath)</span></code></pre></div><h2 id=pathlib><code>pathlib</code></h2><div class=sourceCode id=cb14><pre class="sourceCode python"><code class="sourceCode python"><span id=cb14-1><a href=#cb14-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> pathlib</span>
-<span id=cb14-2><a href=#cb14-2 aria-hidden=true tabindex=-1></a>path <span class=op>=</span> Path(<span class=bu>str</span><span class=op>=</span><span class=va>None</span>) <span class=co># None defaults to cwd</span></span>
-<span id=cb14-3><a href=#cb14-3 aria-hidden=true tabindex=-1></a>path.iterdir() <span class=co># if path is dir, yields path objects of contents</span></span>
-<span id=cb14-4><a href=#cb14-4 aria-hidden=true tabindex=-1></a>path.glob(pattern)</span>
-<span id=cb14-5><a href=#cb14-5 aria-hidden=true tabindex=-1></a>path.rglob(pattern) <span class=co># recursive glob, like path.glob(f&quot;**/{pattern}&quot;)</span></span>
-<span id=cb14-6><a href=#cb14-6 aria-hidden=true tabindex=-1></a>path.joinpath(<span class=op>*</span>path_fragments)</span>
-<span id=cb14-7><a href=#cb14-7 aria-hidden=true tabindex=-1></a>path.is_dir()</span>
-<span id=cb14-8><a href=#cb14-8 aria-hidden=true tabindex=-1></a>path.is_file()</span>
-<span id=cb14-9><a href=#cb14-9 aria-hidden=true tabindex=-1></a>path.exists()</span>
-<span id=cb14-10><a href=#cb14-10 aria-hidden=true tabindex=-1></a></span>
-<span id=cb14-11><a href=#cb14-11 aria-hidden=true tabindex=-1></a><span class=co># Path(&quot;dir/hi.py&quot;)</span></span>
-<span id=cb14-12><a href=#cb14-12 aria-hidden=true tabindex=-1></a>path.name <span class=co># &quot;hi.py&quot;</span></span>
-<span id=cb14-13><a href=#cb14-13 aria-hidden=true tabindex=-1></a>path.suffix <span class=co># &quot;.py&quot;</span></span>
-<span id=cb14-14><a href=#cb14-14 aria-hidden=true tabindex=-1></a>path.stem <span class=co># &quot;hi&quot;</span></span></code></pre></div><h1 id=internet-protocols-and-support>Internet Protocols and Support</h1><div class=sourceCode id=cb15><pre class="sourceCode python"><code class="sourceCode python"><span id=cb15-1><a href=#cb15-1 aria-hidden=true tabindex=-1></a><span class=im>from</span> urllib.request <span class=im>import</span> Request, urlopen</span>
-<span id=cb15-2><a href=#cb15-2 aria-hidden=true tabindex=-1></a></span>
-<span id=cb15-3><a href=#cb15-3 aria-hidden=true tabindex=-1></a>a <span class=op>=</span> <span class=st>&quot;www.example.com&quot;</span></span>
-<span id=cb15-4><a href=#cb15-4 aria-hidden=true tabindex=-1></a>req <span class=op>=</span> Request(a)</span>
-<span id=cb15-5><a href=#cb15-5 aria-hidden=true tabindex=-1></a>req.add_header(<span class=st>&#39;Accept-Encoding&#39;</span>, <span class=st>&#39;gzip&#39;</span>)</span>
-<span id=cb15-6><a href=#cb15-6 aria-hidden=true tabindex=-1></a>response <span class=op>=</span> urlopen(req)</span>
-<span id=cb15-7><a href=#cb15-7 aria-hidden=true tabindex=-1></a>read <span class=op>=</span> response.read()</span>
-<span id=cb15-8><a href=#cb15-8 aria-hidden=true tabindex=-1></a>response.info()</span></code></pre></div></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>
+<span id=cb10-3><a href=#cb10-3 aria-hidden=true tabindex=-1></a>regex <span class=op>=</span> re.<span class=bu>compile</span>(pattern, re.IGNORECASE)</span>
+<span id=cb10-4><a href=#cb10-4 aria-hidden=true tabindex=-1></a>match <span class=op>=</span> regex.match(text) <span class=co># scans only the beginning of the string</span></span>
+<span id=cb10-5><a href=#cb10-5 aria-hidden=true tabindex=-1></a>search <span class=op>=</span> regex.search(text) <span class=co># scans through the whole string</span></span>
+<span id=cb10-6><a href=#cb10-6 aria-hidden=true tabindex=-1></a></span>
+<span id=cb10-7><a href=#cb10-7 aria-hidden=true tabindex=-1></a>a <span class=op>=</span> <span class=st>&quot;123abc&quot;</span></span>
+<span id=cb10-8><a href=#cb10-8 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> re.match(<span class=st>&quot;[a-z]+&quot;</span>, a) <span class=co># None</span></span>
+<span id=cb10-9><a href=#cb10-9 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> re.search(<span class=st>&quot;[a-z]+&quot;</span>, a) <span class=co># &quot;abc&quot;</span></span>
+<span id=cb10-10><a href=#cb10-10 aria-hidden=true tabindex=-1></a><span class=cf>if</span> m:</span>
+<span id=cb10-11><a href=#cb10-11 aria-hidden=true tabindex=-1></a>    <span class=bu>print</span>(<span class=st>&quot;matched!&quot;</span>)</span>
+<span id=cb10-12><a href=#cb10-12 aria-hidden=true tabindex=-1></a></span>
+<span id=cb10-13><a href=#cb10-13 aria-hidden=true tabindex=-1></a><span class=co># m is a match object</span></span>
+<span id=cb10-14><a href=#cb10-14 aria-hidden=true tabindex=-1></a>m.group(<span class=dv>0</span>) <span class=co># &quot;abc&quot;</span></span>
+<span id=cb10-15><a href=#cb10-15 aria-hidden=true tabindex=-1></a>m.group(<span class=st>&quot;name&quot;</span>)</span></code></pre></div><h1 id=files-and-data>Files and Data</h1><h2 id=csv><code>csv</code></h2><div class=sourceCode id=cb11><pre class="sourceCode python"><code class="sourceCode python"><span id=cb11-1><a href=#cb11-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> csv</span>
+<span id=cb11-2><a href=#cb11-2 aria-hidden=true tabindex=-1></a></span>
+<span id=cb11-3><a href=#cb11-3 aria-hidden=true tabindex=-1></a><span class=co># need to specify newline=&#39;&#39;, else</span></span>
+<span id=cb11-4><a href=#cb11-4 aria-hidden=true tabindex=-1></a><span class=co># - newlines embedded inside quoted fields will not be interpreted correctly</span></span>
+<span id=cb11-5><a href=#cb11-5 aria-hidden=true tabindex=-1></a><span class=co># - for &quot;\r\n&quot; line-endings, on write, an extra \r will be added</span></span>
+<span id=cb11-6><a href=#cb11-6 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> f:</span>
+<span id=cb11-7><a href=#cb11-7 aria-hidden=true tabindex=-1></a>    reader <span class=op>=</span> csv.reader(f, delimiter<span class=op>=</span><span class=st>&#39;,&#39;</span>, quotechar<span class=op>=</span><span class=st>&#39;&quot;&#39;</span>)</span>
+<span id=cb11-8><a href=#cb11-8 aria-hidden=true tabindex=-1></a>    <span class=cf>for</span> row <span class=kw>in</span> reader:</span>
+<span id=cb11-9><a href=#cb11-9 aria-hidden=true tabindex=-1></a>        <span class=bu>print</span>(<span class=st>&#39;, &#39;</span>.join(row))</span>
+<span id=cb11-10><a href=#cb11-10 aria-hidden=true tabindex=-1></a></span>
+<span id=cb11-11><a href=#cb11-11 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, <span class=st>&#39;w&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> f:</span>
+<span id=cb11-12><a href=#cb11-12 aria-hidden=true tabindex=-1></a>    writer <span class=op>=</span> csv.writer(f, delimiter<span class=op>=</span><span class=st>&#39;,&#39;</span>, quotechar<span class=op>=</span><span class=st>&#39;&quot;&#39;</span>, quoting<span class=op>=</span>csv.QUOTE_MINIMAL)</span>
+<span id=cb11-13><a href=#cb11-13 aria-hidden=true tabindex=-1></a>    writer.writerow(some)</span>
+<span id=cb11-14><a href=#cb11-14 aria-hidden=true tabindex=-1></a>    writer.writerows(someiterable)</span>
+<span id=cb11-15><a href=#cb11-15 aria-hidden=true tabindex=-1></a></span>
+<span id=cb11-16><a href=#cb11-16 aria-hidden=true tabindex=-1></a><span class=cf>with</span> <span class=bu>open</span>(<span class=st>&#39;f.csv&#39;</span>, <span class=st>&#39;w&#39;</span>, newline<span class=op>=</span><span class=st>&#39;&#39;</span>) <span class=im>as</span> csvfile:</span>
+<span id=cb11-17><a href=#cb11-17 aria-hidden=true tabindex=-1></a>    fieldnames <span class=op>=</span> [<span class=st>&#39;a&#39;</span>, <span class=st>&#39;b&#39;</span>]</span>
+<span id=cb11-18><a href=#cb11-18 aria-hidden=true tabindex=-1></a>    writer <span class=op>=</span> csv.DictWriter(csvfile, fieldnames<span class=op>=</span>fieldnames)</span>
+<span id=cb11-19><a href=#cb11-19 aria-hidden=true tabindex=-1></a></span>
+<span id=cb11-20><a href=#cb11-20 aria-hidden=true tabindex=-1></a>    writer.writeheader()</span>
+<span id=cb11-21><a href=#cb11-21 aria-hidden=true tabindex=-1></a>    writer.writerow({<span class=st>&#39;a&#39;</span>: <span class=dv>1</span>, <span class=st>&#39;b&#39;</span>: <span class=dv>2</span>})</span>
+<span id=cb11-22><a href=#cb11-22 aria-hidden=true tabindex=-1></a></span>
+<span id=cb11-23><a href=#cb11-23 aria-hidden=true tabindex=-1></a><span class=co># csv.DictReader(f, fieldnames=None, restkey=None, restval=None, dialect=&#39;excel&#39;, *args, **kwds)</span></span></code></pre></div><h2 id=json><code>json</code></h2><div class=sourceCode id=cb12><pre class="sourceCode python"><code class="sourceCode python"><span id=cb12-1><a href=#cb12-1 aria-hidden=true tabindex=-1></a>string <span class=op>=</span>  <span class=st>&#39;{ &quot;name&quot;:&quot;JK&quot;, &quot;age&quot;:30}&#39;</span></span>
+<span id=cb12-2><a href=#cb12-2 aria-hidden=true tabindex=-1></a>dictionary <span class=op>=</span> json.loads(string)</span>
+<span id=cb12-3><a href=#cb12-3 aria-hidden=true tabindex=-1></a>string <span class=op>=</span> json.dumps(obj, indent<span class=op>=</span><span class=dv>4</span>, sort_keys<span class=op>=</span><span class=va>True</span>)</span>
+<span id=cb12-4><a href=#cb12-4 aria-hidden=true tabindex=-1></a></span>
+<span id=cb12-5><a href=#cb12-5 aria-hidden=true tabindex=-1></a>contents <span class=op>=</span> json.load(file_obj)</span>
+<span id=cb12-6><a href=#cb12-6 aria-hidden=true tabindex=-1></a>json.dump(obj, file_obj)</span></code></pre></div><h2 id=data-compression-and-archiving>Data Compression and Archiving</h2><div class=sourceCode id=cb13><pre class="sourceCode python"><code class="sourceCode python"><span id=cb13-1><a href=#cb13-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> gzip</span>
+<span id=cb13-2><a href=#cb13-2 aria-hidden=true tabindex=-1></a></span>
+<span id=cb13-3><a href=#cb13-3 aria-hidden=true tabindex=-1></a>c <span class=op>=</span> gzip.compress(msg)</span>
+<span id=cb13-4><a href=#cb13-4 aria-hidden=true tabindex=-1></a>m <span class=op>=</span> gzip.decompress(c)</span></code></pre></div><h1 id=file-and-directory-access>File and Directory Access</h1><h2 id=os.path><code>os.path</code></h2><div class=sourceCode id=cb14><pre class="sourceCode python"><code class="sourceCode python"><span id=cb14-1><a href=#cb14-1 aria-hidden=true tabindex=-1></a>os.getcwd()</span>
+<span id=cb14-2><a href=#cb14-2 aria-hidden=true tabindex=-1></a>os.listdir(path) <span class=op>--&gt;</span> files, directories</span>
+<span id=cb14-3><a href=#cb14-3 aria-hidden=true tabindex=-1></a>    <span class=co># path = &quot;..&quot; or &quot;/&quot; to go up a directory</span></span>
+<span id=cb14-4><a href=#cb14-4 aria-hidden=true tabindex=-1></a>    <span class=co># path = &quot;.&quot;, for current directory</span></span>
+<span id=cb14-5><a href=#cb14-5 aria-hidden=true tabindex=-1></a>os.walk(path) <span class=op>--&gt;</span> dirpath, dirnames, filenames<span class=op>;</span> recursive</span>
+<span id=cb14-6><a href=#cb14-6 aria-hidden=true tabindex=-1></a>os.path.isfile(path)</span>
+<span id=cb14-7><a href=#cb14-7 aria-hidden=true tabindex=-1></a>os.path.join(path1, path2, ...)</span>
+<span id=cb14-8><a href=#cb14-8 aria-hidden=true tabindex=-1></a>os.path.split(path)</span>
+<span id=cb14-9><a href=#cb14-9 aria-hidden=true tabindex=-1></a>os.path.absname(relpath)</span></code></pre></div><h2 id=pathlib><code>pathlib</code></h2><div class=sourceCode id=cb15><pre class="sourceCode python"><code class="sourceCode python"><span id=cb15-1><a href=#cb15-1 aria-hidden=true tabindex=-1></a><span class=im>import</span> pathlib</span>
+<span id=cb15-2><a href=#cb15-2 aria-hidden=true tabindex=-1></a>path <span class=op>=</span> Path(<span class=bu>str</span><span class=op>=</span><span class=va>None</span>) <span class=co># None defaults to cwd</span></span>
+<span id=cb15-3><a href=#cb15-3 aria-hidden=true tabindex=-1></a>path.iterdir() <span class=co># if path is dir, yields path objects of contents</span></span>
+<span id=cb15-4><a href=#cb15-4 aria-hidden=true tabindex=-1></a>path.glob(pattern)</span>
+<span id=cb15-5><a href=#cb15-5 aria-hidden=true tabindex=-1></a>path.rglob(pattern) <span class=co># recursive glob, like path.glob(f&quot;**/{pattern}&quot;)</span></span>
+<span id=cb15-6><a href=#cb15-6 aria-hidden=true tabindex=-1></a>path.joinpath(<span class=op>*</span>path_fragments)</span>
+<span id=cb15-7><a href=#cb15-7 aria-hidden=true tabindex=-1></a>path.is_dir()</span>
+<span id=cb15-8><a href=#cb15-8 aria-hidden=true tabindex=-1></a>path.is_file()</span>
+<span id=cb15-9><a href=#cb15-9 aria-hidden=true tabindex=-1></a>path.exists()</span>
+<span id=cb15-10><a href=#cb15-10 aria-hidden=true tabindex=-1></a></span>
+<span id=cb15-11><a href=#cb15-11 aria-hidden=true tabindex=-1></a><span class=co># Path(&quot;dir/hi.py&quot;)</span></span>
+<span id=cb15-12><a href=#cb15-12 aria-hidden=true tabindex=-1></a>path.name <span class=co># &quot;hi.py&quot;</span></span>
+<span id=cb15-13><a href=#cb15-13 aria-hidden=true tabindex=-1></a>path.suffix <span class=co># &quot;.py&quot;</span></span>
+<span id=cb15-14><a href=#cb15-14 aria-hidden=true tabindex=-1></a>path.stem <span class=co># &quot;hi&quot;</span></span></code></pre></div><h1 id=internet-protocols-and-support>Internet Protocols and Support</h1><div class=sourceCode id=cb16><pre class="sourceCode python"><code class="sourceCode python"><span id=cb16-1><a href=#cb16-1 aria-hidden=true tabindex=-1></a><span class=im>from</span> urllib.request <span class=im>import</span> Request, urlopen</span>
+<span id=cb16-2><a href=#cb16-2 aria-hidden=true tabindex=-1></a></span>
+<span id=cb16-3><a href=#cb16-3 aria-hidden=true tabindex=-1></a>a <span class=op>=</span> <span class=st>&quot;www.example.com&quot;</span></span>
+<span id=cb16-4><a href=#cb16-4 aria-hidden=true tabindex=-1></a>req <span class=op>=</span> Request(a)</span>
+<span id=cb16-5><a href=#cb16-5 aria-hidden=true tabindex=-1></a>req.add_header(<span class=st>&#39;Accept-Encoding&#39;</span>, <span class=st>&#39;gzip&#39;</span>)</span>
+<span id=cb16-6><a href=#cb16-6 aria-hidden=true tabindex=-1></a>response <span class=op>=</span> urlopen(req)</span>
+<span id=cb16-7><a href=#cb16-7 aria-hidden=true tabindex=-1></a>read <span class=op>=</span> response.read()</span>
+<span id=cb16-8><a href=#cb16-8 aria-hidden=true tabindex=-1></a>response.info()</span></code></pre></div></article></div></main><footer class="site-footer h-card"><data href=/ class=u-url></data><div class=wrapper><h2 class=footer-heading>Notes in Progress</h2><div class=footer-col-wrapper><div class="footer-col footer-col-1"><ul class=contact-list><li class=p-name>febkor</li></ul></div></div></div></div></footer></body></html>
